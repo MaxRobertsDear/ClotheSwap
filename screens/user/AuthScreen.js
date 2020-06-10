@@ -55,7 +55,11 @@ const AuthScreen = props => {
 	const textChangeHandler = useCallback(
 		(inputIdentifier, text) => {
 			let isValid = false;
-			if (text.trim().length > 0) {
+			if (inputIdentifier === 'password') {
+				if (text.trim().length > 5) {
+					isValid = true;
+				}
+			} else if (text.trim().length > 0) {
 				isValid = true;
 			}
 			dispatchFormState({
