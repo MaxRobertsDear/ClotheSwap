@@ -49,8 +49,8 @@ const AuthScreen = (props) => {
       password: '',
     },
     inputValidities: {
-      email: false,
-      password: false,
+      email: true,
+      password: true,
     },
     formIsValid: false,
   })
@@ -94,6 +94,7 @@ const AuthScreen = (props) => {
         <Card style={styles.authContainer}>
           <Input
             label='Email'
+            placeholder='example@example.com'
             keyboardType='email-address'
             autoCapitalize='none'
             returnKeyType='next'
@@ -103,6 +104,7 @@ const AuthScreen = (props) => {
           />
           <Input
             label='Password'
+            placeholder='minimum 6 characters'
             keyboardType='default'
             autoCapitalize='none'
             secureTextEntry
