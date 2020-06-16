@@ -74,10 +74,11 @@ exports[`renders correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           autoCapitalize="none"
-          errorText={false}
+          errorText={true}
           keyboardType="email-address"
           label="Email"
           onChangeText={[Function]}
+          placeholder="example@example.com"
           rejectResponderTermination={true}
           returnKeyType="next"
           style={
@@ -91,10 +92,6 @@ exports[`renders correctly 1`] = `
           underlineColorAndroid="transparent"
           value=""
         />
-        <Text>
-          Please enter a valid 
-          Email
-        </Text>
       </View>
       <View
         style={
@@ -116,11 +113,12 @@ exports[`renders correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           autoCapitalize="none"
-          errorText={false}
+          errorText={true}
           keyboardType="default"
           label="Password"
           minLength={5}
           onChangeText={[Function]}
+          placeholder="minimum 6 characters"
           rejectResponderTermination={true}
           secureTextEntry={true}
           style={
@@ -134,10 +132,6 @@ exports[`renders correctly 1`] = `
           underlineColorAndroid="transparent"
           value=""
         />
-        <Text>
-          Please enter a valid 
-          Password
-        </Text>
       </View>
       <View
         style={
