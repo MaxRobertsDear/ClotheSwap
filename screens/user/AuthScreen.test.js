@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthScreen from './AuthScreen'
-import { render, fireEvent } from 'react-native-testing-library'
+import { render, fireEvent, waitFor } from 'react-native-testing-library'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { rootReducer } from '../../App'
@@ -19,7 +19,12 @@ test('renders correctly', async () => {
   expect(tree).toMatchSnapshot()
 })
 test('email and password fields correctly update with appropriate validation messages', async () => {
-  const { queryByPlaceholder, queryByText } = renderWithRedux(<AuthScreen />)
+  const {
+    queryByPlaceholder,
+    queryByText,
+    getByDisplayValue,
+    getByText,
+  } = renderWithRedux(<AuthScreen />)
   const passwordField = queryByPlaceholder('minimum 6 characters')
   const emailField = queryByPlaceholder('example@example.com')
   const emailValidationMessage = queryByText(/Please enter a valid Email/i)
@@ -34,15 +39,18 @@ test('email and password fields correctly update with appropriate validation mes
   fireEvent.changeText(passwordField, '123456')
   fireEvent.changeText(emailField, 'jondoe@email.com')
 
-  expect(passwordField).toHaveProp('value', '123456')
-  expect(emailField).toHaveProp('value', 'jondoe@email.com')
+  expect(getByDisplayValue('123456')).toBeTruthy()
+  expect(getByDisplayValue('jondoe@email.com')).toBeTruthy()
   expect(emailValidationMessage).not.toBeTruthy()
   expect(passwordValidationMessage).not.toBeTruthy()
 
-  // can successfully change input before submittal
-  fireEvent.changeText(passwordField, 'password')
+  // validation prompts shown on invalid entries
+  fireEvent.changeText(passwordField, '123')
   fireEvent.changeText(emailField, 'email@email.com')
+  fireEvent.changeText(emailField, '')
 
-  expect(passwordField).toHaveProp('value', 'password')
-  expect(emailField).toHaveProp('value', 'email@email.com')
+  expect(getByDisplayValue('123')).toBeTruthy()
+  expect(getByDisplayValue('')).toBeTruthy()
+  await waitFor(() => getByText(/Please enter a valid Password/i))
+  await waitFor(() => getByText(/Please enter a valid Email/i))
 })
