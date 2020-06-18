@@ -56,22 +56,25 @@ const AuthScreen = (props) => {
   })
 
   const signupHandler = () => {
-    dispatch(
-      authActions.signup(
-        formState.inputValues.email,
-        formState.inputValues.password,
-      ),
-    )
+    if (formState.formIsValid) {
+      dispatch(
+        authActions.signup(
+          formState.inputValues.email,
+          formState.inputValues.password,
+        ),
+      )
+    }
+    return
   }
 
   const textChangeHandler = useCallback(
     (inputIdentifier, text) => {
+      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       let isValid = false
-      if (inputIdentifier === 'password') {
-        if (text.trim().length > 5) {
-          isValid = true
-        }
-      } else if (text.trim().length > 0) {
+      if (inputIdentifier === 'password' && text.trim().length > 5) {
+        isValid = true
+      }
+      if (inputIdentifier === 'email' && emailRegex.test(text.toLowerCase())) {
         isValid = true
       }
       dispatchFormState({
