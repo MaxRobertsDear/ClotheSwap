@@ -59,21 +59,19 @@ const AuthScreen = (props) => {
 
   const signupLoginHandler = () => {
     if (formState.formIsValid) {
+      let action
       if (isSignup) {
-        dispatch(
-          authActions.signup(
-            formState.inputValues.email,
-            formState.inputValues.password,
-          ),
+        action = authActions.signup(
+          formState.inputValues.email,
+          formState.inputValues.password,
         )
       } else if (!isSignup) {
-        dispatch(
-          authActions.login(
-            formState.inputValues.email,
-            formState.inputValues.password,
-          ),
+        action = authActions.login(
+          formState.inputValues.email,
+          formState.inputValues.password,
         )
       }
+      dispatch(action)
     }
     return
   }
