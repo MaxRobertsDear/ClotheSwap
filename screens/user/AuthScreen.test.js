@@ -54,3 +54,16 @@ test('email and password fields correctly update with appropriate validation mes
   await waitFor(() => getByText(/Please enter a valid Password/i))
   await waitFor(() => getByText(/Please enter a valid Email/i))
 })
+
+test('user can toggle between login and signup', async () => {
+  const { getAllByA11yRole, getByText } = renderWithRedux(<AuthScreen />)
+
+  // user is presented with Login screen by default
+  expect(getAllByA11yRole('button')[0]).toHaveTextContent(/Login/i)
+  expect(getAllByA11yRole('button')[1]).toHaveTextContent(/Switch to Sign Up/i)
+
+  // when toggling Login/Sign Up, user is presented with appropriate options
+  fireEvent.press(getByText(/Switch to Sign Up/i))
+  expect(getByText(/Sign Up/i)).toBeTruthy()
+  expect(getByText(/Switch to Login/i)).toBeTruthy()
+})
