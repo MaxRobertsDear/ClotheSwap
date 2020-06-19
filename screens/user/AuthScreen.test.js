@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import AuthScreen from './AuthScreen'
 import { render, fireEvent, waitFor } from 'react-native-testing-library'
 import { createStore } from 'redux'
@@ -53,4 +54,32 @@ test('email and password fields correctly update with appropriate validation mes
   expect(getByDisplayValue('')).toBeTruthy()
   await waitFor(() => getByText(/Please enter a valid Password/i))
   await waitFor(() => getByText(/Please enter a valid Email/i))
+})
+
+test('user can toggle between login and signup', async () => {
+  const { getAllByA11yRole, getByText } = renderWithRedux(<AuthScreen />)
+
+  // user is presented with Login screen by default
+  expect(getAllByA11yRole('button')[0]).toHaveTextContent(/Login/i)
+  expect(getAllByA11yRole('button')[1]).toHaveTextContent(/Switch to Sign Up/i)
+
+  // when toggling Login/Sign Up, user is presented with appropriate options
+  fireEvent.press(getByText(/Switch to Sign Up/i))
+  expect(getByText(/Sign Up/i)).toBeTruthy()
+  expect(getByText(/Switch to Login/i)).toBeTruthy()
+})
+
+test('error message shown for invalid email / password', async () => {
+  jest.spyOn(Alert, 'alert')
+  const { queryByPlaceholder, getByText } = renderWithRedux(<AuthScreen />)
+  const passwordField = queryByPlaceholder('minimum 6 characters')
+  const emailField = queryByPlaceholder('example@example.com')
+
+  // user tries to login with invalid email
+  fireEvent.changeText(emailField, 'test@test.com')
+  fireEvent.changeText(passwordField, '123456')
+  // TODO: mock the api response for success and failure
+
+  // fireEvent.press(getByText(/Login/i))
+  // expect(Alert.alert).toHaveBeenCalled()
 })
