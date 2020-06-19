@@ -16,7 +16,6 @@ import Colors from '../../constants/Colors'
 import Input from '../../components/UI/Input'
 import Card from '../../components/UI/Card'
 import * as authActions from '../../store/actions/auth'
-import { set } from 'react-native-reanimated'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 

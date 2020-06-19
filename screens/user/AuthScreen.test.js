@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import AuthScreen from './AuthScreen'
 import { render, fireEvent, waitFor } from 'react-native-testing-library'
 import { createStore } from 'redux'
@@ -66,4 +67,19 @@ test('user can toggle between login and signup', async () => {
   fireEvent.press(getByText(/Switch to Sign Up/i))
   expect(getByText(/Sign Up/i)).toBeTruthy()
   expect(getByText(/Switch to Login/i)).toBeTruthy()
+})
+
+test('error message shown for invalid email / password', async () => {
+  jest.spyOn(Alert, 'alert')
+  const { queryByPlaceholder, getByText } = renderWithRedux(<AuthScreen />)
+  const passwordField = queryByPlaceholder('minimum 6 characters')
+  const emailField = queryByPlaceholder('example@example.com')
+
+  // user tries to login with invalid email
+  fireEvent.changeText(emailField, 'test@test.com')
+  fireEvent.changeText(passwordField, '123456')
+  // TODO: mock the api response for success and failure
+
+  // fireEvent.press(getByText(/Login/i))
+  // expect(Alert.alert).toHaveBeenCalled()
 })
