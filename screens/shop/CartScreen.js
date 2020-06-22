@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as cartActions from '../../store/actions/cart'
@@ -9,7 +8,7 @@ import Colors from '../../constants/Colors'
 import CartItem from '../../components/shop/CartItem'
 import Card from '../../components/UI/Card'
 
-const CartScreen = (props) => {
+const CartScreen = () => {
   const dispatch = useDispatch()
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount)
   const cartItems = useSelector((state) => {

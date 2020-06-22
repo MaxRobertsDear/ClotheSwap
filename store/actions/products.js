@@ -29,7 +29,7 @@ export const fetchProducts = () => {
       }
       dispatch({ type: SET_PRODUCTS, products: loadedProducts })
     } catch (err) {
-      throw err
+      throw new Error(err)
     }
   }
 }

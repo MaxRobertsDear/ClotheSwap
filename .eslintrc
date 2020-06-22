@@ -8,5 +8,12 @@
       "browser": true,
   },
   "plugins": ["react", "react-native"],
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:import/recommended", "eslint-config-prettier"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:import/recommended", "plugin:react-hooks/recommended", "eslint-config-prettier"],
+  "rules": {
+    "no-undef": "off", 
+    "no-case-declarations": "off", 
+    "react/prop-types": "off", 
+    "react/display-name": "off", 
+    "no-useless-escape": "off"
+  }
 }

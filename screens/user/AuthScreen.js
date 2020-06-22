@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react'
 import {
-  ScrollView,
   Button,
-  Text,
   View,
   KeyboardAvoidingView,
   StyleSheet,
@@ -42,7 +40,7 @@ const formReducer = (state, action) => {
   return state
 }
 
-const AuthScreen = (props) => {
+const AuthScreen = () => {
   const dispatch = useDispatch()
   const [isSignup, setIsSignup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
