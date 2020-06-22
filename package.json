@@ -8,9 +8,9 @@
 		"eject": "expo eject",
 		"test": "jest",
 		"lint": "eslint --ignore-path .gitignore .",
-		"prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|jsx)\"",
+		"prettier": "prettier --ignore-path .gitignore \"**/*.+(js)\"",
 		"format": "npm run prettier -- --write",
-		"check-format": "prettier --ignore-path .gitignore --list-different \"src/**/*.+(js|jsx)\"",
+		"check-format": "prettier --ignore-path .gitignore --list-different \"**/*.+(js)\"",
 		"validate": "npm-run-all --parallel check-format lint test"
 	},
 	"dependencies": {
