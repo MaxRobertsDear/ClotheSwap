@@ -1,0 +1,12 @@
+{
+  "parserOptions": {
+  "ecmaFeatures": {
+      "jsx": true
+  }
+  },
+  "env": {
+      "browser": true,
+  },
+  "plugins": ["react", "react-native"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:import/recommended", "eslint-config-prettier"],
+}
