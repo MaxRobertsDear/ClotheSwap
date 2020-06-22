@@ -1,14 +1,9 @@
-import React, { useState, createContext } from 'react'
-import { Text, View, Platform } from 'react-native'
+import React, { useState } from 'react'
+import { Platform } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import {
-  createStore,
-  combineReducers,
-  Middleware,
-  applyMiddleware,
-} from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
@@ -45,6 +40,7 @@ const Drawer = createDrawerNavigator()
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   if (!fontLoaded) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Platform } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 import Card from '../UI/Card'
 

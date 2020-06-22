@@ -8,9 +8,9 @@
 		"eject": "expo eject",
 		"test": "jest",
 		"lint": "eslint --ignore-path .gitignore .",
-		"prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|jsx)\"",
+		"prettier": "prettier --ignore-path .gitignore \"**/*.+(js)\"",
 		"format": "npm run prettier -- --write",
-		"check-format": "prettier --ignore-path .gitignore --list-different \"src/**/*.+(js|jsx)\"",
+		"check-format": "prettier --ignore-path .gitignore --list-different \"**/*.+(js)\"",
 		"validate": "npm-run-all --parallel check-format lint test"
 	},
 	"dependencies": {
@@ -45,6 +45,7 @@
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-import": "^2.21.2",
 		"eslint-plugin-react": "^7.20.0",
+		"eslint-plugin-react-hooks": "^4.0.4",
 		"eslint-plugin-react-native": "^3.8.1",
 		"husky": "^4.2.5",
 		"jest-expo": "^37.0.0",

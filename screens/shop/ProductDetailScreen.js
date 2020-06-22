@@ -12,11 +12,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
   )
   const dispatch = useDispatch()
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params.productTitle,
     })
-  }, [navigation])
+  }, [navigation, route.params.productTitle])
 
   return (
     <ScrollView>

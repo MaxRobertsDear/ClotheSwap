@@ -48,6 +48,7 @@ const EditProductScreen = ({ navigation, route }) => {
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId),
   )
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -101,13 +102,13 @@ const EditProductScreen = ({ navigation, route }) => {
     }
     setIsLoading(false)
     navigation.goBack()
-  }, [dispatch, formState, prodId])
+  }, [dispatch, formState, prodId, editedProduct, navigation])
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params && route.params.productId ? 'Edit Item' : 'Add Item',
     })
-  }, [navigation, prodId, formState.inputValues.title])
+  }, [navigation, prodId, formState.inputValues.title, route.params])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -115,7 +116,7 @@ const EditProductScreen = ({ navigation, route }) => {
         <CustomHeaderButton iconName='save' onPress={submitHandler} />
       ),
     })
-  }, [submitHandler])
+  }, [submitHandler, navigation])
 
   const textChangeHandler = (inputIdentifier, text) => {
     let isValid = false

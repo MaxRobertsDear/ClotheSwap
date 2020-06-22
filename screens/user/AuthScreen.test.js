@@ -71,7 +71,7 @@ test('user can toggle between login and signup', async () => {
 
 test('error message shown for invalid email / password', async () => {
   jest.spyOn(Alert, 'alert')
-  const { queryByPlaceholder, getByText } = renderWithRedux(<AuthScreen />)
+  const { queryByPlaceholder } = renderWithRedux(<AuthScreen />)
   const passwordField = queryByPlaceholder('minimum 6 characters')
   const emailField = queryByPlaceholder('example@example.com')
 
