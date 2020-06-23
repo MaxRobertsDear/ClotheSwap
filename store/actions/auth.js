@@ -20,7 +20,12 @@ export const signup = (email, password) => {
     )
 
     if (!response.ok) {
-      throw new Error('Something went wrong!')
+      const errResponseData = await response.json()
+      let errorMessage = 'Something went wrong!'
+      if (errResponseData.error.message === 'EMAIL_EXISTS') {
+        errorMessage = 'Email already been used'
+      } 
+      throw new Error(errorMessage)
     }
 
     const resData = await response.json()

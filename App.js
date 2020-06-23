@@ -67,7 +67,7 @@ export default function App() {
                 Platform.OS === 'android' ? Colors.primary : 'white',
             },
             headerTitleStyle: {
-              color: Platform.OS === 'android' ? 'whitea' : Colors.primary,
+              color: Platform.OS === 'android' ? 'white' : Colors.primary,
             },
           }}
         />
@@ -137,7 +137,7 @@ export default function App() {
                 Platform.OS === 'android' ? Colors.primary : 'white',
             },
             headerTitleStyle: {
-              color: Platform.OS === 'android' ? 'whitea' : Colors.primary,
+              color: Platform.OS === 'android' ? 'white' : Colors.primary,
             },
           }}
         />
@@ -169,7 +169,7 @@ export default function App() {
                 Platform.OS === 'android' ? Colors.primary : 'white',
             },
             headerTitleStyle: {
-              color: Platform.OS === 'android' ? 'whitea' : Colors.primary,
+              color: Platform.OS === 'android' ? 'white' : Colors.primary,
             },
           }}
         />
