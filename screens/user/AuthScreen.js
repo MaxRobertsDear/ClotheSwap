@@ -81,11 +81,10 @@ const AuthScreen = () => {
       setIsLoading(true)
       try {
         await dispatch(action)
-        // navigation.navigate('Home')
       } catch (err) {
         setError(err.message)
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
     return
   }
