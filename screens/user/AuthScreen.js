@@ -40,7 +40,7 @@ const formReducer = (state, action) => {
   return state
 }
 
-const AuthScreen = () => {
+const AuthScreen = ({navigation}) => {
   const dispatch = useDispatch()
   const [isSignup, setIsSignup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -81,10 +81,11 @@ const AuthScreen = () => {
       setIsLoading(true)
       try {
         await dispatch(action)
+        navigation.navigate('Home')
       } catch (err) {
         setError(err.message)
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
     return
   }

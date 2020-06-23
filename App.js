@@ -12,6 +12,7 @@ import ReduxThunk from 'redux-thunk'
 import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/order'
+import authReducer from './store/reducers/auth'
 import ProductsOverviewScreen from './screens/shop/ProductsOverviewScreen'
 import ProductDetailScreen from './screens/shop/ProductDetailScreen'
 import Colors from './constants/Colors'
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   orders: ordersReducer,
+  auth: authReducer
 })
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
