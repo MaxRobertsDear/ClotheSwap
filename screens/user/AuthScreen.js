@@ -83,8 +83,8 @@ const AuthScreen = () => {
         await dispatch(action)
       } catch (err) {
         setError(err.message)
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
     return
   }
