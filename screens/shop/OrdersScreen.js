@@ -20,7 +20,6 @@ const OrdersScreen = ({ navigation }) => {
   }, [navigation])
 
   const orders = useSelector((state) => state.orders.orders)
-  // console.log(orders)
   return (
     <FlatList
       data={orders}

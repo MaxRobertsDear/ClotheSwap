@@ -34,7 +34,6 @@ export default (state = initialState, action) => {
         userProducts: state.userProducts.concat(newProduct),
       }
     case UPDATE_PRODUCT:
-      console.log('triggered update product reducer')
       const productIndex = state.userProducts.findIndex(
         (prod) => prod.id === action.pid,
       )

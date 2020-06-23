@@ -33,7 +33,7 @@ export const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   orders: ordersReducer,
-  auth: authReducer
+  auth: authReducer,
 })
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
@@ -42,9 +42,6 @@ const Drawer = createDrawerNavigator()
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false)
-  // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
   if (!fontLoaded) {
     return (
       <AppLoading
@@ -147,42 +144,34 @@ export default function App() {
     )
   }
 
-  let screenStack
-  console.log('-------------------------------------', isLoggedIn)
-  if (isLoggedIn) {
-    screenStack = (
-      <Drawer.Navigator initialRouteName='Home' drawerType='slide'>
-        <Drawer.Screen name='Home' component={Home} />
-        <Drawer.Screen name='Orders' component={Orders} />
-        <Drawer.Screen name='Admin' component={Admin} />
-      </Drawer.Navigator>
-    )
-  } else {
-    screenStack = (
-      <Stack.Navigator>
-        <Stack.Screen
-          name='AuthScreen'
-          component={AuthScreen}
-          initialParams={isLoggedIn}
-          options={{
-            title: 'Auth Screen',
-            headerStyle: {
-              backgroundColor:
-                Platform.OS === 'android' ? Colors.primary : 'white',
-            },
-            headerTitleStyle: {
-              color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            },
-          }}
-        />
-        <Stack.Screen name='Home' component={Home} />
-      </Stack.Navigator>
-    )
-  }
-
   return (
     <Provider store={store}>
-      <NavigationContainer>{screenStack}</NavigationContainer>
+      <NavigationContainer>
+        {store.getState().auth.userId ? (
+          <Drawer.Navigator initialRouteName='Home' drawerType='slide'>
+            <Drawer.Screen name='Home' component={Home} />
+            <Drawer.Screen name='Orders' component={Orders} />
+            <Drawer.Screen name='Admin' component={Admin} />
+          </Drawer.Navigator>
+        ) : (
+          <Stack.Navigator>
+            <Stack.Screen
+              name='AuthScreen'
+              component={AuthScreen}
+              options={{
+                title: 'Auth Screen',
+                headerStyle: {
+                  backgroundColor:
+                    Platform.OS === 'android' ? Colors.primary : 'white',
+                },
+                headerTitleStyle: {
+                  color: Platform.OS === 'android' ? 'white' : Colors.primary,
+                },
+              }}
+            />
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
     </Provider>
   )
 }
