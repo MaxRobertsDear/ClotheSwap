@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react'
+import React, { useLayoutEffect, useCallback, useEffect, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -20,20 +20,26 @@ const ProductsOverviewScreen = ({ navigation }) => {
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
   const [error, setError] = useState()
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      setIsLoading(true)
-      try {
-        await dispatch(productsActions.fetchProducts())
-      } catch (err) {
-        setError(err.message)
-      }
-      setIsLoading(false)
+  const loadProducts = useCallback(async () => {
+    setIsRefreshing(true)
+    setError(null)
+    try {
+      await dispatch(productsActions.fetchProducts())
+    } catch (err) {
+      setError(err.message)
     }
-    loadProducts()
-  }, [dispatch])
+    setIsRefreshing(false)
+  }, [dispatch, setError])
+
+  useEffect(() => {
+    setIsLoading(true)
+    loadProducts().then(() => {
+      setIsLoading(false)
+    })
+  }, [dispatch, loadProducts])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -97,6 +103,8 @@ const ProductsOverviewScreen = ({ navigation }) => {
 
   return (
     <FlatList
+      onRefresh={loadProducts}
+      refreshing={isRefreshing}
       data={products}
       renderItem={(itemData) => (
         <ProductItem

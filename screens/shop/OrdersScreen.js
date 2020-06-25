@@ -27,7 +27,9 @@ const OrdersScreen = ({ navigation }) => {
 
   useEffect(() => {
     setIsLoading(true)
-    dispatch(ordersActions.fetchOrders()).then(setIsLoading(false))
+    dispatch(ordersActions.fetchOrders()).then(() => {
+      setIsLoading(false)
+    })
   }, [dispatch])
 
   if (isLoading) {
