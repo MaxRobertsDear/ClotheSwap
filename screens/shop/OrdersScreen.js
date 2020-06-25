@@ -1,9 +1,11 @@
-import React, { useLayoutEffect } from 'react'
-import { FlatList } from 'react-native'
-import { useSelector } from 'react-redux'
+import React, { useLayoutEffect, useEffect, useState } from 'react'
+import { FlatList, ActivityIndicator, View, StyleSheet } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import OrderItem from '../../components/shop/OrderItem'
+import * as ordersActions from '../../store/actions/orders'
+import Colors from '../../constants/Colors'
 
 const OrdersScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -20,6 +22,22 @@ const OrdersScreen = ({ navigation }) => {
   }, [navigation])
 
   const orders = useSelector((state) => state.orders.orders)
+  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setIsLoading(true)
+    dispatch(ordersActions.fetchOrders()).then(setIsLoading(false))
+  }, [dispatch])
+
+  if (isLoading) {
+    return (
+      <View style={styles.laodingSpinner}>
+        <ActivityIndicator size='large' color={Colors.primary} />
+      </View>
+    )
+  }
+
   return (
     <FlatList
       data={orders}
@@ -34,5 +52,13 @@ const OrdersScreen = ({ navigation }) => {
     />
   )
 }
+
+const styles = StyleSheet.create({
+  laodingSpinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})
 
 export default OrdersScreen
