@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react'
-import { FlatList, Button, Alert } from 'react-native'
+import { FlatList, Button, Alert, View, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
@@ -9,6 +9,7 @@ import * as productActions from '../../store/actions/products'
 
 const UserProductsScreen = ({ navigation }) => {
   const userProducts = useSelector((state) => state.products.userProducts)
+  console.log(userProducts)
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {
@@ -51,6 +52,14 @@ const UserProductsScreen = ({ navigation }) => {
 
   const editProductHandler = (id) => {
     navigation.navigate('EditProductsScreen', { productId: id })
+  }
+
+  if (!userProducts.length) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>No products found. Maybe you should create some</Text>
+      </View>
+    )
   }
 
   return (

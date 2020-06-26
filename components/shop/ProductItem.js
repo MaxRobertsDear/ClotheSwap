@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native'
 import Card from '../UI/Card'
 
 const ProductItem = (props) => {
+  console.log(props.image)
   return (
     <Card style={styles.product}>
       <View style={styles.touchable}>
@@ -44,8 +45,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   image: {
-    height: '100%',
-    width: '100%',
+    height: 100,
+    width: 200,
     overflow: 'hidden',
   },
   title: {

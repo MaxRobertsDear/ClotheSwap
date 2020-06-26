@@ -1,5 +1,11 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react'
-import { FlatList, ActivityIndicator, View, StyleSheet } from 'react-native'
+import {
+  FlatList,
+  ActivityIndicator,
+  View,
+  StyleSheet,
+  Text,
+} from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
@@ -36,6 +42,14 @@ const OrdersScreen = ({ navigation }) => {
     return (
       <View style={styles.laodingSpinner}>
         <ActivityIndicator size='large' color={Colors.primary} />
+      </View>
+    )
+  }
+
+  if (!orders.length) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>No products found. Maybe you should order some.</Text>
       </View>
     )
   }
