@@ -9,7 +9,6 @@ import * as productActions from '../../store/actions/products'
 
 const UserProductsScreen = ({ navigation }) => {
   const userProducts = useSelector((state) => state.products.userProducts)
-  console.log(userProducts)
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {
