@@ -1,7 +1,8 @@
 import React from 'react'
-import { Platform } from 'react-native'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { Platform, Button, View, SafeAreaView } from 'react-native'
+import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
+import { useDispatch } from 'react-redux'
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen'
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen'
@@ -10,6 +11,7 @@ import CartScreen from '../screens/shop/CartScreen'
 import OrdersScreen from '../screens/shop/OrdersScreen'
 import UserProductsScreen from '../screens/user/UserProductsScreen'
 import EditProductsScreen from '../screens/user/EditProductScreen'
+import * as authActions from '../store/actions/auth'
 
 const Drawer = createDrawerNavigator()
 const Stack = createStackNavigator()
@@ -50,6 +52,7 @@ const Home = () => {
 }
 
 const Admin = () => {
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -106,8 +109,25 @@ const Orders = () => {
 }
 
 const ShopNavigator = () => {
+  const dispatch = useDispatch()
+
   return (
-    <Drawer.Navigator initialRouteName='Home' drawerType='slide'>
+    <Drawer.Navigator initialRouteName='Home' drawerType='slide' drawerContent={props => {
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+            <DrawerItemList {...props} />
+            <Button
+              title="Logout"
+              color={Colors.primary}
+              onPress={() => {
+                dispatch(authActions.logout());
+              }}
+            />
+          </SafeAreaView>
+        </View>
+      );
+    }}>
       <Drawer.Screen name='Home' component={Home} />
       <Drawer.Screen name='Orders' component={Orders} />
       <Drawer.Screen name='Admin' component={Admin} />
