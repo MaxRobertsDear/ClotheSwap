@@ -39,7 +39,7 @@ export const addOrders = (cartItems, totalAmount) => {
     const response = await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/orders/${
         getState().auth.userId
-      }.json?auth=${getState().auth.userId}`,
+      }.json?auth=${getState().auth.token}`,
       {
         method: 'POST',
         headers: {

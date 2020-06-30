@@ -3,15 +3,20 @@ import React, {
   useCallback,
   useReducer,
   useState,
+  useEffect,
 } from 'react'
 import {
   View,
   ScrollView,
   StyleSheet,
+  Button,
+  Image,
   Alert,
   ActivityIndicator,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
 import Input from '../../components/UI/Input'
@@ -51,6 +56,19 @@ const EditProductScreen = ({ navigation, route }) => {
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
+  const [imageUrl, setImageUrl] = useState()
+  // console.log('imageUrl: ', imageUrl)
+
+  useEffect(() => {
+    getPermissionAsync()
+  }, [])
+
+  const getPermissionAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!')
+    }
+  }
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
@@ -131,6 +149,24 @@ const EditProductScreen = ({ navigation, route }) => {
     })
   }
 
+  const pickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      })
+      if (!result.cancelled) {
+        setImageUrl(result.uri)
+        textChangeHandler('imageUrl', result.uri)
+      }
+      console.log(result)
+    } catch (E) {
+      console.log(E)
+    }
+  }
+
   if (isLoading) {
     return (
       <View style={styles.centered}>
@@ -151,14 +187,14 @@ const EditProductScreen = ({ navigation, route }) => {
           value={formState.inputValues.title}
           onChangeText={(input) => textChangeHandler('title', input)}
         />
-
+        {/* 
         <Input
           label='Image Url'
           errorText={formState.inputValidities.imageUrl}
           returnKeyType='next'
           value={formState.inputValues.imageUrl}
           onChangeText={(input) => textChangeHandler('imageUrl', input)}
-        />
+        /> */}
 
         {editedProduct ? null : (
           <Input
@@ -179,6 +215,17 @@ const EditProductScreen = ({ navigation, route }) => {
           value={formState.inputValues.description}
           onChangeText={(input) => textChangeHandler('description', input)}
         />
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Button title='Pick an image from camera roll' onPress={pickImage} />
+          {imageUrl && (
+            <Image
+              source={{ uri: imageUrl }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
+        </View>
       </View>
     </ScrollView>
   )

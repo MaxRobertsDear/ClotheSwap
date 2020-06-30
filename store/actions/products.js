@@ -90,6 +90,7 @@ export const createProduct = (title, description, imageUrl, price) => {
 }
 
 export const updateProduct = (id, title, description, imageUrl) => {
+  console.log('title: ', title, ', imageUrl: ', imageUrl)
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${
