@@ -4,7 +4,9 @@ import { Provider } from 'react-redux'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
 import ReduxThunk from 'redux-thunk'
+import * as firebase from 'firebase'
 
+import { firebaseConfig } from './secure-key/keys'
 import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/order'
@@ -18,6 +20,8 @@ const fetchFonts = () => {
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   })
 }
+
+firebase.initializeApp(firebaseConfig)
 
 export const rootReducer = combineReducers({
   products: productsReducer,
