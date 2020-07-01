@@ -1,3 +1,5 @@
+import * as firebase from 'firebase'
+
 import Product from '../../models/product'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
@@ -75,6 +77,21 @@ export const createProduct = (title, description, imageUrl, price) => {
     )
     const resData = await response.json()
 
+    const uploadImage = async (uri, prodId) => {
+      const response = await fetch(uri)
+      const blob = await response.blob()
+      const imageName = uri.split('/').pop()
+
+      const ref = firebase
+        .storage()
+        .ref()
+        .child('images/' + prodId + '/' + imageName)
+      ref.put(blob)
+    }
+
+    uploadImage(imageUrl, resData.name)
+
+    console.log(resData)
     dispatch({
       type: CREATE_PRODUCT,
       productData: {
@@ -90,7 +107,6 @@ export const createProduct = (title, description, imageUrl, price) => {
 }
 
 export const updateProduct = (id, title, description, imageUrl) => {
-  console.log('title: ', title, ', imageUrl: ', imageUrl)
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${

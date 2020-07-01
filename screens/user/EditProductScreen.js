@@ -17,6 +17,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
+// import * as firebase from 'firebase'
+
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
 import Input from '../../components/UI/Input'
@@ -57,7 +59,6 @@ const EditProductScreen = ({ navigation, route }) => {
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState()
-  // console.log('imageUrl: ', imageUrl)
 
   useEffect(() => {
     getPermissionAsync()
@@ -161,7 +162,7 @@ const EditProductScreen = ({ navigation, route }) => {
         setImageUrl(result.uri)
         textChangeHandler('imageUrl', result.uri)
       }
-      console.log(result)
+      // console.log(result)
     } catch (E) {
       console.log(E)
     }
