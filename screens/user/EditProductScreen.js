@@ -17,7 +17,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
-// import * as firebase from 'firebase'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'

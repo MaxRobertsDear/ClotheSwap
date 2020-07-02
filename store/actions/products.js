@@ -18,17 +18,32 @@ export const fetchProducts = () => {
       const resData = await response.json()
       const loadedProducts = []
       for (const key in resData) {
+        const imageUrl = await firebase
+          .storage()
+          .ref(`images/${key}`)
+          .getDownloadURL()
         loadedProducts.push(
           new Product(
             key,
             resData[key].ownerId,
             resData[key].title,
-            resData[key].imageUrl,
+            imageUrl,
             resData[key].description,
             resData[key].price,
           ),
         )
       }
+
+      // const downloadImage = async () => {
+      //   const ref = firebase
+      //     .storage()
+      //     .ref()
+      //     .child('images/-MBEqgavdPjuG9oNvoGK')
+      //   ref.getDownloadURL()
+      // }
+
+      // console.log(downloadImage())
+
       dispatch({
         type: SET_PRODUCTS,
         products: loadedProducts,
@@ -80,18 +95,17 @@ export const createProduct = (title, description, imageUrl, price) => {
     const uploadImage = async (uri, prodId) => {
       const response = await fetch(uri)
       const blob = await response.blob()
-      const imageName = uri.split('/').pop()
+      // const imageName = uri.split('/').pop()
 
       const ref = firebase
         .storage()
         .ref()
-        .child('images/' + prodId + '/' + imageName)
+        .child('images/' + prodId)
       ref.put(blob)
     }
 
     uploadImage(imageUrl, resData.name)
 
-    console.log(resData)
     dispatch({
       type: CREATE_PRODUCT,
       productData: {
@@ -124,6 +138,19 @@ export const updateProduct = (id, title, description, imageUrl) => {
         }),
       },
     )
+    const uploadImage = async (uri, prodId) => {
+      const response = await fetch(uri)
+      const blob = await response.blob()
+      // const imageName = uri.split('/').pop()
+
+      const ref = firebase
+        .storage()
+        .ref()
+        .child('images/' + prodId)
+      ref.put(blob)
+    }
+
+    uploadImage(imageUrl, id)
     dispatch({
       type: UPDATE_PRODUCT,
       pid: id,
