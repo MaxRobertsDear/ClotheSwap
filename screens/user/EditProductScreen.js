@@ -13,11 +13,11 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  Text,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
-// import * as firebase from 'firebase'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
@@ -62,6 +62,12 @@ const EditProductScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     getPermissionAsync()
+  }, [])
+
+  useEffect(() => {
+    if (editedProduct && formState.inputValues.imageUrl) {
+      setImageUrl(formState.inputValues.imageUrl)
+    }
   }, [])
 
   const getPermissionAsync = async () => {
@@ -166,6 +172,14 @@ const EditProductScreen = ({ navigation, route }) => {
     } catch (E) {
       console.log(E)
     }
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>An error occurred.</Text>
+      </View>
+    )
   }
 
   if (isLoading) {
