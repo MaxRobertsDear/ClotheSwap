@@ -34,16 +34,6 @@ export const fetchProducts = () => {
         )
       }
 
-      // const downloadImage = async () => {
-      //   const ref = firebase
-      //     .storage()
-      //     .ref()
-      //     .child('images/-MBEqgavdPjuG9oNvoGK')
-      //   ref.getDownloadURL()
-      // }
-
-      // console.log(downloadImage())
-
       dispatch({
         type: SET_PRODUCTS,
         products: loadedProducts,
@@ -61,13 +51,15 @@ export const deleteProduct = (productId) => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${productId}.json?auth=${
-        getState().auth.userId
+        getState().auth.token
       }`,
       {
         method: 'DELETE',
       },
     )
-    return dispatch({ type: DELETE_PRODUCT, pid: productId })
+    const imageUrl = await firebase.storage().ref(`images/${productId}`)
+    imageUrl.delete()
+    dispatch({ type: DELETE_PRODUCT, pid: productId })
   }
 }
 export const createProduct = (title, description, imageUrl, price) => {
