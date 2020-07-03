@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useCallback,
+  useLayoutEffect,
+} from 'react'
 import {
   Button,
   View,
@@ -14,6 +20,7 @@ import Colors from '../../constants/Colors'
 import Input from '../../components/UI/Input'
 import Card from '../../components/UI/Card'
 import * as authActions from '../../store/actions/auth'
+import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
@@ -40,11 +47,24 @@ const formReducer = (state, action) => {
   return state
 }
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const [isSignup, setIsSignup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState()
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <CustomHeaderButton
+          iconName='remove'
+          onPress={() => {
+            navigation.navigate('AboutScreen')
+          }}
+        />
+      ),
+    })
+  }, [navigation])
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {

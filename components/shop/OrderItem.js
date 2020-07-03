@@ -9,7 +9,7 @@ const OrderItem = (props) => {
   return (
     <Card style={styles.orderItem}>
       <View style={styles.summary}>
-        <Text style={styles.totalAmount}>${props.amount}</Text>
+        <Text style={styles.totalAmount}>£{props.amount}</Text>
         <Text style={styles.date}>{props.date}</Text>
       </View>
       <Button

@@ -14,7 +14,9 @@ const CustomHeaderButton = (props) => {
       color={Platform.OS === 'android' ? 'white' : Colors.primary}
       size={23}
       TouchableComponent
-    ></Icon.Button>
+    >
+      {props.title}
+    </Icon.Button>
   )
 }
 
