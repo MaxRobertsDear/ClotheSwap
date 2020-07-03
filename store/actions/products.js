@@ -76,7 +76,6 @@ export const createProduct = (title, description, imageUrl, price) => {
         body: JSON.stringify({
           title,
           description,
-          imageUrl,
           price,
           ownerId: getState().auth.userId,
         }),
@@ -87,7 +86,6 @@ export const createProduct = (title, description, imageUrl, price) => {
     const uploadImage = async (uri, prodId) => {
       const response = await fetch(uri)
       const blob = await response.blob()
-      // const imageName = uri.split('/').pop()
 
       const ref = firebase
         .storage()
@@ -126,14 +124,12 @@ export const updateProduct = (id, title, description, imageUrl) => {
         body: JSON.stringify({
           title,
           description,
-          imageUrl,
         }),
       },
     )
     const uploadImage = async (uri, prodId) => {
       const response = await fetch(uri)
       const blob = await response.blob()
-      // const imageName = uri.split('/').pop()
 
       const ref = firebase
         .storage()
