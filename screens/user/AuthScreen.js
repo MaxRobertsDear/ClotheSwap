@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  Platform,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useDispatch } from 'react-redux'
@@ -111,8 +112,7 @@ const AuthScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      behavior='padding'
-      keyboardVerticalOffset={50}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.screen}
     >
       <LinearGradient colors={['#ffafbd', '#ffc3a0']} style={styles.gradient}>
