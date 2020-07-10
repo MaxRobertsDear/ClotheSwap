@@ -21,6 +21,7 @@ const AuthNavigator = () => {
           },
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
           },
         }}
       />

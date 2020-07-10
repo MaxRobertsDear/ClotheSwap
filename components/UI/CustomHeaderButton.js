@@ -1,5 +1,5 @@
 import React from 'react'
-import Platform from 'react-native'
+import { Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Colors from '../../constants/Colors'

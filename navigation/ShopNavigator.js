@@ -30,6 +30,7 @@ const Home = () => {
           },
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
           },
         }}
       />
@@ -38,6 +39,13 @@ const Home = () => {
         component={ProductDetailScreen}
         options={{
           title: 'Product Details',
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? Colors.primary : 'white',
+          },
+          headerTitleStyle: {
+            alignSelf: 'center',
+          },
         }}
       />
       <Stack.Screen
@@ -45,6 +53,14 @@ const Home = () => {
         component={CartScreen}
         options={{
           title: 'Cart',
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? Colors.primary : 'white',
+          },
+          headerTitleStyle: {
+            color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
+          },
         }}
       />
     </Stack.Navigator>
@@ -52,7 +68,6 @@ const Home = () => {
 }
 
 const Admin = () => {
-
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -66,6 +81,7 @@ const Admin = () => {
           },
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
           },
         }}
       />
@@ -80,6 +96,7 @@ const Admin = () => {
           },
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
           },
         }}
       />
@@ -101,6 +118,7 @@ const Orders = () => {
           },
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : Colors.primary,
+            alignSelf: 'center',
           },
         }}
       />
@@ -112,22 +130,26 @@ const ShopNavigator = () => {
   const dispatch = useDispatch()
 
   return (
-    <Drawer.Navigator initialRouteName='Home' drawerType='slide' drawerContent={props => {
-      return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-            <DrawerItemList {...props} />
-            <Button
-              title="Logout"
-              color={Colors.primary}
-              onPress={() => {
-                dispatch(authActions.logout());
-              }}
-            />
-          </SafeAreaView>
-        </View>
-      );
-    }}>
+    <Drawer.Navigator
+      initialRouteName='Home'
+      drawerType='slide'
+      drawerContent={(props) => {
+        return (
+          <View style={{ flex: 1, paddingTop: 20 }}>
+            <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+              <DrawerItemList {...props} />
+              <Button
+                title='Logout'
+                color={Colors.primary}
+                onPress={() => {
+                  dispatch(authActions.logout())
+                }}
+              />
+            </SafeAreaView>
+          </View>
+        )
+      }}
+    >
       <Drawer.Screen name='Home' component={Home} />
       <Drawer.Screen name='Orders' component={Orders} />
       <Drawer.Screen name='Admin' component={Admin} />

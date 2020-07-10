@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, Platform } from 'react-native'
 
 import Card from '../UI/Card'
 
@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   image: {
-    height: '100%',
-    width: '100%',
+    height: Platform.OS !== 'web' ? '100%' : 200,
+    width: Platform.OS !== 'web' ? '100%' : 300,
     overflow: 'hidden',
+    alignSelf: 'center',
   },
   title: {
     fontFamily: 'open-sans-bold',
@@ -60,10 +61,12 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'row',
+    alignSelf: Platform.OS === 'web' ? 'center' : null,
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '22%',
     paddingHorizontal: 20,
+    width: Platform.OS === 'web' ? 300 : null,
   },
 })
 
