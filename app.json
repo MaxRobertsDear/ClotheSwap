@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Shop-App",
-    "slug": "my-shop-app",
+    "name": "ClotheSwap",
+    "slug": "ClotheSwap",
     "platforms": [
       "ios",
       "android",
