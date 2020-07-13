@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Platform } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Platform,
+  Dimensions,
+} from 'react-native'
 
 import Card from '../UI/Card'
 
@@ -24,8 +31,9 @@ const ProductItem = (props) => {
 
 const styles = StyleSheet.create({
   product: {
-    height: 300,
-    margin: 20,
+    height: 320,
+    width: Dimensions.get('window').width / 2 - 15,
+    margin: 5,
   },
   touchable: {
     overflow: 'hidden',
@@ -60,12 +68,10 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   actions: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignSelf: Platform.OS === 'web' ? 'center' : null,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'space-around',
     height: '22%',
-    paddingHorizontal: 20,
     width: Platform.OS === 'web' ? 300 : null,
   },
 })
