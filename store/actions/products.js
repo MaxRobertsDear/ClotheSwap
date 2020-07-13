@@ -10,7 +10,9 @@ export const fetchProducts = () => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
-        'https://rn-shop-app-f2dc2.firebaseio.com/products.json',
+        `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
+          getState().auth.token
+        }`,
       )
       if (!response.ok) {
         throw new Error('Something went wrong!')
@@ -20,7 +22,7 @@ export const fetchProducts = () => {
       for (const key in resData) {
         const imageUrl = await firebase
           .storage()
-          .ref(`images/${key}`)
+          .ref(`images/${key}_700x700`)
           .getDownloadURL()
         loadedProducts.push(
           new Product(

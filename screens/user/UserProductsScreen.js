@@ -65,6 +65,11 @@ const UserProductsScreen = ({ navigation }) => {
     <FlatList
       data={userProducts}
       keyExtractor={(item) => item.id}
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
+      initialNumToRender={6}
+      numColumns={2}
       renderItem={(itemData) => (
         <ProductItem
           image={itemData.item.imageUrl}

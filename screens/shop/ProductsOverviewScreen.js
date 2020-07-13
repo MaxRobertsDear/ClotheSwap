@@ -103,9 +103,14 @@ const ProductsOverviewScreen = ({ navigation }) => {
 
   return (
     <FlatList
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
+      initialNumToRender={6}
       onRefresh={loadProducts}
       refreshing={isRefreshing}
       data={products}
+      numColumns={2}
       renderItem={(itemData) => (
         <ProductItem
           title={itemData.item.title}
