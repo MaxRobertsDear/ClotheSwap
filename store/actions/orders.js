@@ -9,7 +9,7 @@ export const fetchOrders = () => {
       const response = await fetch(
         `https://rn-shop-app-f2dc2.firebaseio.com/orders/${
           getState().auth.userId
-        }.json`,
+        }.json?auth=${getState().auth.token}`,
       )
       if (!response.ok) {
         throw new Error('Something went wrong!')

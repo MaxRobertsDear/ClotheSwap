@@ -10,7 +10,7 @@ const CustomHeaderButton = (props) => {
       {...props}
       // eslint-disable-next-line react/prop-types
       name={props.iconName}
-      backgroundColor='white'
+      backgroundColor={Platform.OS === 'android' ? Colors.primary : 'white'}
       color={Platform.OS === 'android' ? 'white' : Colors.primary}
       size={23}
       TouchableComponent

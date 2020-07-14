@@ -31,7 +31,7 @@ const ProductItem = (props) => {
 
 const styles = StyleSheet.create({
   product: {
-    height: 320,
+    height: 380,
     width: Dimensions.get('window').width / 2 - 15,
     margin: 5,
   },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   details: {
     alignItems: 'center',
-    height: '18%',
+    height: '15%',
     padding: 10,
   },
   imageContainer: {
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'column',
-    alignSelf: Platform.OS === 'web' ? 'center' : null,
+    alignSelf: 'center',
     justifyContent: 'space-around',
-    height: '22%',
-    width: Platform.OS === 'web' ? 300 : null,
+    height: '25%',
+    width: Platform.OS === 'web' ? 300 : '75%',
   },
 })
 
