@@ -1,26 +1,35 @@
 import { AsyncStorage } from 'react-native'
+import { ThunkAction } from 'redux-thunk'
+import { ActionCreator, Action, Dispatch } from 'redux'
+import { RootState } from '../../App'
 
-import { apiKey } from '../../secure-key/keys'
-// export const SIGNUP = 'SIGNUP'
-// export const LOGIN = 'LOGIN'
+import { apiKey } from '../../api-config'
 export const AUTHENTICATE = 'AUTHENTICATE'
 export const LOGOUT = 'LOGOUT'
 export const SET_DID_TRY_AL = 'SET_DID_TRY_AL'
 
-let timer
+let timer: number
 
-export const setDidTryAL = () => {
+type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>
+
+
+export const setDidTryAL: ActionCreator<Action<string>> = () => {
   return { type: SET_DID_TRY_AL }
 }
 
-export const authenticate = (userId, token, expiryTime) => {
+export const authenticate = (userId: string, token: string, expiryTime: number): AppThunk => {
   return (dispatch) => {
     dispatch(setLogoutTimer(expiryTime))
     dispatch({ type: AUTHENTICATE, userId: userId, token: token })
   }
 }
 
-export const signup = (email, password) => {
+export const signup = (email: string, password: string): AppThunk => {
   return async (dispatch) => {
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
@@ -61,7 +70,7 @@ export const signup = (email, password) => {
   }
 }
 
-export const login = (email, password) => {
+export const login = (email: string, password: string): AppThunk => {
   return async (dispatch) => {
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
@@ -112,7 +121,7 @@ export const logout = () => {
   return { type: LOGOUT }
 }
 
-const setLogoutTimer = (expirationTime) => {
+const setLogoutTimer = (expirationTime: number): AppThunk => {
   return (dispatch) => {
     timer = setTimeout(() => {
       dispatch(logout())
@@ -120,7 +129,7 @@ const setLogoutTimer = (expirationTime) => {
   }
 }
 
-const saveDataToStorage = (token, userId, expirationDate) => {
+const saveDataToStorage = (token: string, userId: string, expirationDate: Date) => {
   AsyncStorage.setItem(
     'userData',
     JSON.stringify({

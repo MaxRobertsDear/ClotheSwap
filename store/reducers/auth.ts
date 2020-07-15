@@ -6,7 +6,7 @@ const initialState = {
   didTryAutoLogin: false
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
     case AUTHENTICATE:
       return {

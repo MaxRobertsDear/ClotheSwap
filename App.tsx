@@ -6,11 +6,15 @@ import * as Font from 'expo-font'
 import ReduxThunk from 'redux-thunk'
 import * as firebase from 'firebase'
 
-import { firebaseConfig } from './secure-key/keys'
+import { firebaseConfig } from './api-config'
+// @ts-ignore
 import productsReducer from './store/reducers/products'
+// @ts-ignore
 import cartReducer from './store/reducers/cart'
+// @ts-ignore
 import ordersReducer from './store/reducers/order'
 import authReducer from './store/reducers/auth'
+// @ts-ignore
 
 import AppNavigator from './navigation/AppNavigator'
 
@@ -29,6 +33,8 @@ export const rootReducer = combineReducers({
   orders: ordersReducer,
   auth: authReducer,
 })
+
+export type RootState = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
 export default function App() {
