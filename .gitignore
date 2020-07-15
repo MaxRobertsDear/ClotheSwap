@@ -9,7 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-secure-key/
+api-config/
 yarn.lock
 
 # macOS
