@@ -4,7 +4,7 @@ import { AuthState, AuthActionTypes } from './auth.d'
 const initialState: AuthState = {
   token: '',
   userId: '',
-  didTryAutoLogin: false
+  didTryAutoLogin: false,
 }
 
 export default (state = initialState, action: AuthActionTypes) => {
@@ -13,17 +13,17 @@ export default (state = initialState, action: AuthActionTypes) => {
       return {
         token: action.token,
         userId: action.userId,
-        didTryAutoLogin: true
+        didTryAutoLogin: true,
       }
     case SET_DID_TRY_AL:
       return {
         ...state,
-        didTryAutoLogin: true
+        didTryAutoLogin: true,
       }
     case LOGOUT:
       return {
         ...initialState,
-        didTryAutoLogin: true
+        didTryAutoLogin: true,
       }
     default:
       return state

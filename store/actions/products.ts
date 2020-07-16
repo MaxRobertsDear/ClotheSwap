@@ -7,14 +7,12 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const SET_PRODUCTS = 'SET_PRODUCTS'
 
-
-
 export const fetchProducts = (): AppThunk => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
         `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-        getState().auth.token
+          getState().auth.token
         }`,
       )
       if (!response.ok) {
@@ -56,7 +54,7 @@ export const deleteProduct = (productId: string): AppThunk => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${productId}.json?auth=${
-      getState().auth.token
+        getState().auth.token
       }`,
       {
         method: 'DELETE',
@@ -68,13 +66,16 @@ export const deleteProduct = (productId: string): AppThunk => {
   }
 }
 
-
-
-export const createProduct = (title: string, description: string, imageUrl: string, price: string): AppThunk => {
+export const createProduct = (
+  title: string,
+  description: string,
+  imageUrl: string,
+  price: string,
+): AppThunk => {
   return async (dispatch, getState) => {
     const response = await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-      getState().auth.token
+        getState().auth.token
       }`,
       {
         method: 'POST',
@@ -119,11 +120,16 @@ export const createProduct = (title: string, description: string, imageUrl: stri
   }
 }
 
-export const updateProduct = (id: string, title: string, description: string, imageUrl: string): AppThunk => {
+export const updateProduct = (
+  id: string,
+  title: string,
+  description: string,
+  imageUrl: string,
+): AppThunk => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${
-      getState().auth.userId
+        getState().auth.userId
       }`,
       {
         method: 'PATCH',

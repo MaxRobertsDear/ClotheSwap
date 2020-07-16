@@ -5,7 +5,15 @@
     }
   },
   "env": {
-    "browser": true,
+    "browser": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+    }
   },
   "plugins": [
     "react",
@@ -16,6 +24,7 @@
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
     "eslint-config-prettier"
   ],
   "rules": {

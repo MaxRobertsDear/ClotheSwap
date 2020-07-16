@@ -6,7 +6,6 @@ import {
 } from '../actions/products'
 import Product from '../../models/product'
 
-
 // state
 interface ProductsState {
   availableProducts: Product[];
@@ -19,7 +18,7 @@ interface UserProducts {
 }
 
 interface Products {
-  products: Product[]
+  products: Product[];
 }
 
 interface ProductData {
@@ -54,5 +53,9 @@ interface SetProductsAction {
   userProducts: UserProducts;
 }
 
-export type ProductActionTypes = DeleteProductAction | CreateProductAction | UpdateProductAction | SetProductsAction
+export type ProductActionTypes =
+  | DeleteProductAction
+  | CreateProductAction
+  | UpdateProductAction
+  | SetProductsAction
 export { ProductsState }

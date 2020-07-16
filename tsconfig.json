@@ -3,12 +3,16 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": [
-      "dom",
-      "esnext"
+      "es6"
     ],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "target": "esnext"
   }
 }

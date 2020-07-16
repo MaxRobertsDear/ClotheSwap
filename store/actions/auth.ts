@@ -1,7 +1,13 @@
 import { AsyncStorage } from 'react-native'
 import { ActionCreator, Action } from 'redux'
 
-import { AppThunk, iAuthenticate } from './index.d'
+import {
+  AppThunk,
+  iAuthenticate,
+  iSignup,
+  iLogin,
+  iSaveDataToStorage,
+} from './index.d'
 import { apiKey } from '../../api-config'
 export const AUTHENTICATE = 'AUTHENTICATE'
 export const LOGOUT = 'LOGOUT'
@@ -9,18 +15,22 @@ export const SET_DID_TRY_AL = 'SET_DID_TRY_AL'
 
 let timer: number
 
-export const setDidTryAL = () => {
+export const setDidTryAL: ActionCreator<Action<string>> = () => {
   return { type: SET_DID_TRY_AL }
 }
 
-export const authenticate = (userId: string, token: string, expiryTime: number): AppThunk => {
+export const authenticate = ({
+  userId,
+  token,
+  expiryTime,
+}: iAuthenticate): AppThunk => {
   return (dispatch) => {
     dispatch(setLogoutTimer(expiryTime))
     dispatch({ type: AUTHENTICATE, userId: userId, token: token })
   }
 }
 
-export const signup = (email: string, password: string): AppThunk => {
+export const signup = ({ email, password }: iSignup): AppThunk => {
   return async (dispatch) => {
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
@@ -49,20 +59,24 @@ export const signup = (email: string, password: string): AppThunk => {
     const resData = await response.json()
 
     dispatch(
-      authenticate(
-        resData.localId,
-        resData.idToken,
-        parseInt(resData.expiresIn) * 1000
-      ),
+      authenticate({
+        userId: resData.localId,
+        token: resData.idToken,
+        expiryTime: parseInt(resData.expiresIn) * 1000,
+      }),
     )
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000,
     )
-    saveDataToStorage(resData.idToken, resData.localId, expirationDate)
+    saveDataToStorage({
+      token: resData.idToken,
+      userId: resData.localId,
+      expirationDate: expirationDate,
+    })
   }
 }
 
-export const login = (email: string, password: string): AppThunk => {
+export const login = ({ email, password }: iLogin): AppThunk => {
   return async (dispatch) => {
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
@@ -92,17 +106,20 @@ export const login = (email: string, password: string): AppThunk => {
 
     const resData = await response.json()
     dispatch(
-      authenticate(
-        resData.localId,
-        resData.idToken,
-        parseInt(resData.expiresIn) * 1000
-
-      ),
+      authenticate({
+        userId: resData.localId,
+        token: resData.idToken,
+        expiryTime: parseInt(resData.expiresIn) * 1000,
+      }),
     )
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000,
     )
-    saveDataToStorage(resData.idToken, resData.localId, expirationDate)
+    saveDataToStorage({
+      token: resData.idToken,
+      userId: resData.localId,
+      expirationDate: expirationDate,
+    })
   }
 }
 
@@ -122,7 +139,11 @@ const setLogoutTimer = (expirationTime: number): AppThunk => {
   }
 }
 
-const saveDataToStorage = (token: string, userId: string, expirationDate: Date) => {
+const saveDataToStorage = ({
+  token,
+  userId,
+  expirationDate,
+}: iSaveDataToStorage) => {
   AsyncStorage.setItem(
     'userData',
     JSON.stringify({

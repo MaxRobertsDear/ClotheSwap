@@ -7,8 +7,6 @@ import {
 import Product from '../../models/product'
 import { ProductActionTypes, ProductsState } from './products.d'
 
-
-
 const initialState: ProductsState = {
   availableProducts: [],
   userProducts: [],
