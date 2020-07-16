@@ -3,14 +3,21 @@ import { ThunkAction } from 'redux-thunk'
 import { RootState } from '../../App'
 
 import { iCreateProduct, iUpdateProduct } from './products.d'
-import { iAuthenticate, iSignup } from './auth.d'
-
+import { iAuthenticate, iSignup, iLogin, iSaveDataToStorage } from './auth.d'
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
-  Action<string>
+  Action<string>,
 >
 
-export { AppThunk, iCreateProduct, iUpdateProduct, iAuthenticate, iSignup }
+export {
+  AppThunk,
+  iCreateProduct,
+  iUpdateProduct,
+  iAuthenticate,
+  iSignup,
+  iLogin,
+  iSaveDataToStorage,
+}

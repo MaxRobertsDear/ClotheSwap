@@ -18,7 +18,10 @@ import * as authActions from '../../store/actions/auth'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-const formReducer = (state, action) => {
+const formReducer = (
+  state: { inputValues: any, inputValidities: any, formIsValid: boolean },
+  action: { type: string, input: string, value: string, isValid: boolean },
+) => {
   if (action.type === FORM_INPUT_UPDATE) {
     const updatedValues = {
       ...state.inputValues,
@@ -69,15 +72,15 @@ const AuthScreen = () => {
     if (formState.formIsValid) {
       let action
       if (isSignup) {
-        action = authActions.signup(
-          formState.inputValues.email,
-          formState.inputValues.password,
-        )
+        action = authActions.signup({
+          email: formState.inputValues.email,
+          password: formState.inputValues.password,
+        })
       } else if (!isSignup) {
-        action = authActions.login(
-          formState.inputValues.email,
-          formState.inputValues.password,
-        )
+        action = authActions.login({
+          email: formState.inputValues.email,
+          password: formState.inputValues.password,
+        })
       }
       setIsLoading(true)
       try {
@@ -125,7 +128,7 @@ const AuthScreen = () => {
             returnKeyType='next'
             errorText={formState.inputValidities.email}
             value={formState.inputValues.email}
-            onChangeText={(input) => textChangeHandler('email', input)}
+            onChangeText={(input: string) => textChangeHandler('email', input)}
           />
           <Input
             label='Password'
@@ -136,7 +139,9 @@ const AuthScreen = () => {
             minLength={5}
             errorText={formState.inputValidities.password}
             value={formState.inputValues.password}
-            onChangeText={(input) => textChangeHandler('password', input)}
+            onChangeText={(input: string) =>
+              textChangeHandler('password', input)
+            }
           />
           <View style={styles.buttonContainer}>
             {isLoading ? (

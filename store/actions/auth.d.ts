@@ -8,5 +8,15 @@ interface iSignup {
   email: string;
   password: string;
 }
+interface iLogin {
+  email: string;
+  password: string;
+}
 
-export { iAuthenticate, iSignup }
+interface iSaveDataToStorage {
+  token: string;
+  userId: string;
+  expirationDate: Date;
+}
+
+export { iAuthenticate, iSignup, iLogin, iSaveDataToStorage }

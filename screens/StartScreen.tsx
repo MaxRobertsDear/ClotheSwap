@@ -25,7 +25,13 @@ const StartScreen = () => {
       }
 
       const expirationTime = expirationDate.getTime() - new Date().getTime()
-      dispatch(authActions.authenticate(userId, token, expirationTime))
+      dispatch(
+        authActions.authenticate({
+          userId: userId,
+          token: token,
+          expiryTime: expirationTime,
+        }),
+      )
     }
 
     tryLogin()

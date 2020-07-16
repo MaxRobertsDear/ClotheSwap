@@ -22,7 +22,9 @@ interface LogoutAction {
   type: typeof LOGOUT;
 }
 
-export type AuthActionTypes = AuthenticateAction | SetDidTryALAction | LogoutAction
-
+export type AuthActionTypes =
+  | AuthenticateAction
+  | SetDidTryALAction
+  | LogoutAction
 
 export { AuthState }

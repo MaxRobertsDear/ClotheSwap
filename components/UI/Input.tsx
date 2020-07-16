@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 
-const Input = (props) => {
+const Input = (props: any) => {
   return (
     <View style={styles.formControl}>
       <Text style={styles.label}>{props.label}</Text>
