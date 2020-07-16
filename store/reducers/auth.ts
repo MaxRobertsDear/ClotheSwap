@@ -1,12 +1,13 @@
 import { AUTHENTICATE, LOGOUT, SET_DID_TRY_AL } from '../actions/auth'
+import { AuthState, AuthActionTypes } from './auth.d'
 
-const initialState = {
-  token: null,
-  userId: null,
+const initialState: AuthState = {
+  token: '',
+  userId: '',
   didTryAutoLogin: false
 }
 
-export default (state = initialState, action: any) => {
+export default (state = initialState, action: AuthActionTypes) => {
   switch (action.type) {
     case AUTHENTICATE:
       return {
@@ -24,11 +25,6 @@ export default (state = initialState, action: any) => {
         ...initialState,
         didTryAutoLogin: true
       }
-    // case SIGNUP:
-    //   return {
-    //     token: action.token,
-    //     userId: action.userId
-    //   }
     default:
       return state
   }

@@ -1,17 +1,20 @@
 import * as firebase from 'firebase'
 
+import { AppThunk } from './index.d'
 import Product from '../../models/product'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const SET_PRODUCTS = 'SET_PRODUCTS'
 
-export const fetchProducts = () => {
+
+
+export const fetchProducts = (): AppThunk => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
         `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-          getState().auth.token
+        getState().auth.token
         }`,
       )
       if (!response.ok) {
@@ -49,11 +52,11 @@ export const fetchProducts = () => {
   }
 }
 
-export const deleteProduct = (productId) => {
+export const deleteProduct = (productId: string): AppThunk => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${productId}.json?auth=${
-        getState().auth.token
+      getState().auth.token
       }`,
       {
         method: 'DELETE',
@@ -64,11 +67,14 @@ export const deleteProduct = (productId) => {
     dispatch({ type: DELETE_PRODUCT, pid: productId })
   }
 }
-export const createProduct = (title, description, imageUrl, price) => {
+
+
+
+export const createProduct = (title: string, description: string, imageUrl: string, price: string): AppThunk => {
   return async (dispatch, getState) => {
     const response = await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-        getState().auth.token
+      getState().auth.token
       }`,
       {
         method: 'POST',
@@ -86,10 +92,9 @@ export const createProduct = (title, description, imageUrl, price) => {
     )
     const resData = await response.json()
 
-    const uploadImage = async (uri, prodId) => {
+    const uploadImage = async (uri: string, prodId: string) => {
       const response = await fetch(uri)
       const blob = await response.blob()
-      // const imageName = uri.split('/').pop()
 
       const ref = firebase
         .storage()
@@ -114,11 +119,11 @@ export const createProduct = (title, description, imageUrl, price) => {
   }
 }
 
-export const updateProduct = (id, title, description, imageUrl) => {
+export const updateProduct = (id: string, title: string, description: string, imageUrl: string): AppThunk => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${
-        getState().auth.userId
+      getState().auth.userId
       }`,
       {
         method: 'PATCH',
@@ -132,10 +137,9 @@ export const updateProduct = (id, title, description, imageUrl) => {
         }),
       },
     )
-    const uploadImage = async (uri, prodId) => {
+    const uploadImage = async (uri: string, prodId: string) => {
       const response = await fetch(uri)
       const blob = await response.blob()
-      // const imageName = uri.split('/').pop()
 
       const ref = firebase
         .storage()

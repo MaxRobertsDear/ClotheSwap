@@ -5,13 +5,16 @@ import {
   SET_PRODUCTS,
 } from '../actions/products'
 import Product from '../../models/product'
+import { ProductActionTypes, ProductsState } from './products.d'
 
-const initialState = {
+
+
+const initialState: ProductsState = {
   availableProducts: [],
   userProducts: [],
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: ProductActionTypes) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return {
@@ -34,7 +37,7 @@ export default (state = initialState, action) => {
       }
     case UPDATE_PRODUCT:
       const productIndex = state.userProducts.findIndex(
-        (prod) => prod.id === action.pid,
+        (prod: { id: string }) => prod.id === action.pid,
       )
       const updatedProduct = new Product(
         action.pid,
@@ -47,7 +50,7 @@ export default (state = initialState, action) => {
       const updatedUserProducts = [...state.userProducts]
       updatedUserProducts[productIndex] = updatedProduct
       const availableProductIndex = state.availableProducts.findIndex(
-        (prod) => prod.id === action.pid,
+        (prod: { id: string }) => prod.id === action.pid,
       )
       const updatedAvailableProducts = [...state.availableProducts]
       updatedAvailableProducts[availableProductIndex] = updatedProduct
@@ -60,12 +63,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userProducts: state.userProducts.filter(
-          (prod) => prod.id !== action.pid,
+          (prod: { id: string }) => prod.id !== action.pid,
         ),
         availableProducts: state.availableProducts.filter(
-          (prod) => prod.id !== action.pid,
+          (prod: { id: string }) => prod.id !== action.pid,
         ),
       }
+    default:
+      return state
   }
-  return state
 }
