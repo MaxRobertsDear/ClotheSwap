@@ -7,7 +7,6 @@ import ReduxThunk from 'redux-thunk'
 import * as firebase from 'firebase'
 
 import { firebaseConfig } from './api-config'
-// @ts-ignore
 import productsReducer from './store/reducers/products'
 // @ts-ignore
 import cartReducer from './store/reducers/cart'

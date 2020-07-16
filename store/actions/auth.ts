@@ -1,8 +1,7 @@
 import { AsyncStorage } from 'react-native'
-import { ThunkAction } from 'redux-thunk'
-import { ActionCreator, Action, Dispatch } from 'redux'
-import { RootState } from '../../App'
+import { ActionCreator, Action } from 'redux'
 
+import { AppThunk, iAuthenticate } from './index.d'
 import { apiKey } from '../../api-config'
 export const AUTHENTICATE = 'AUTHENTICATE'
 export const LOGOUT = 'LOGOUT'
@@ -10,15 +9,7 @@ export const SET_DID_TRY_AL = 'SET_DID_TRY_AL'
 
 let timer: number
 
-type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->
-
-
-export const setDidTryAL: ActionCreator<Action<string>> = () => {
+export const setDidTryAL = () => {
   return { type: SET_DID_TRY_AL }
 }
 
@@ -56,11 +47,12 @@ export const signup = (email: string, password: string): AppThunk => {
     }
 
     const resData = await response.json()
+
     dispatch(
       authenticate(
         resData.localId,
         resData.idToken,
-        parseInt(resData.expiresIn) * 1000,
+        parseInt(resData.expiresIn) * 1000
       ),
     )
     const expirationDate = new Date(
@@ -103,7 +95,8 @@ export const login = (email: string, password: string): AppThunk => {
       authenticate(
         resData.localId,
         resData.idToken,
-        parseInt(resData.expiresIn) * 1000,
+        parseInt(resData.expiresIn) * 1000
+
       ),
     )
     const expirationDate = new Date(
