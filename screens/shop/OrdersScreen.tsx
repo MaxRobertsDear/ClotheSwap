@@ -12,8 +12,9 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import OrderItem from '../../components/shop/OrderItem'
 import * as ordersActions from '../../store/actions/orders'
 import Colors from '../../constants/Colors'
+import { RootState } from '../../App'
 
-const OrdersScreen = ({ navigation }) => {
+const OrdersScreen = ({ navigation }: any) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -27,12 +28,13 @@ const OrdersScreen = ({ navigation }) => {
     })
   }, [navigation])
 
-  const orders = useSelector((state) => state.orders.orders)
+  const orders = useSelector((state: RootState) => state.orders.orders)
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setIsLoading(true)
+    // @ts-ignore
     dispatch(ordersActions.fetchOrders()).then(() => {
       setIsLoading(false)
     })
