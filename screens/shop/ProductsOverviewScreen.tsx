@@ -14,17 +14,29 @@ import * as cartActions from '../../store/actions/cart'
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
+import Product from '../../models/product'
 
-const ProductsOverviewScreen = ({ navigation }) => {
-  const products = useSelector((state) => state.products.availableProducts)
+interface AvailableProducts {
+  availableProducts: Array<Product>;
+}
+
+interface RootState {
+  products: AvailableProducts;
+}
+
+const ProductsOverviewScreen = ({ navigation }: any) => {
+  const products = useSelector(
+    (state: RootState) => state.products.availableProducts,
+  )
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [error, setError] = useState()
+  const [error, setError]: any = useState()
 
   const loadProducts = useCallback(async () => {
     setIsRefreshing(true)
+
     setError(null)
     try {
       await dispatch(productsActions.fetchProducts())
@@ -67,14 +79,14 @@ const ProductsOverviewScreen = ({ navigation }) => {
     })
   }, [navigation])
 
-  const selectItemHandler = (id, title) => {
+  const selectItemHandler = (id: string, title: string) => {
     navigation.navigate('ProductDetails', {
       productId: id,
       productTitle: title,
     })
   }
 
-  const addToCartHandler = (item) => {
+  const addToCartHandler = (item: Product) => {
     dispatch(cartActions.addToCart(item))
   }
 
