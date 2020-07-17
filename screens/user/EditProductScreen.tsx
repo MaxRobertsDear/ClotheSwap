@@ -23,10 +23,10 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
 import Input from '../../components/UI/Input'
 import Colors from '../../constants/Colors'
-
+import { RootState } from '../shop/index.d'
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-const formReducer = (state, action) => {
+const formReducer = (state: any, action: any) => {
   if (action.type === FORM_INPUT_UPDATE) {
     const updatedValues = {
       ...state.inputValues,
@@ -49,16 +49,16 @@ const formReducer = (state, action) => {
   return state
 }
 
-const EditProductScreen = ({ navigation, route }) => {
+const EditProductScreen = ({ navigation, route }: any) => {
   const dispatch = useDispatch()
   const prodId = route.params && route.params.productId
-  const editedProduct = useSelector((state) =>
+  const editedProduct = useSelector((state: RootState) =>
     state.products.userProducts.find((prod) => prod.id === prodId),
   )
   // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState()
+  const [error, setError]: any = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState()
+  const [imageUrl, setImageUrl]: any = useState()
 
   useEffect(() => {
     getPermissionAsync()
@@ -118,6 +118,7 @@ const EditProductScreen = ({ navigation, route }) => {
             formState.inputValues.title,
             formState.inputValues.description,
             formState.inputValues.imageUrl,
+            // @ts-ignore
             +formState.inputValues.price,
           ),
         )
@@ -143,7 +144,7 @@ const EditProductScreen = ({ navigation, route }) => {
     })
   }, [submitHandler, navigation])
 
-  const textChangeHandler = (inputIdentifier, text) => {
+  const textChangeHandler = (inputIdentifier: string, text: string) => {
     let isValid = false
     if (text.trim().length > 0) {
       isValid = true
@@ -158,7 +159,7 @@ const EditProductScreen = ({ navigation, route }) => {
 
   const pickImage = async () => {
     try {
-      let result = await ImagePicker.launchImageLibraryAsync({
+      const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 4],
@@ -200,7 +201,7 @@ const EditProductScreen = ({ navigation, route }) => {
           autoCorrect
           returnKeyType='next'
           value={formState.inputValues.title}
-          onChangeText={(input) => textChangeHandler('title', input)}
+          onChangeText={(input: string) => textChangeHandler('title', input)}
         />
         {/* 
         <Input
@@ -218,7 +219,7 @@ const EditProductScreen = ({ navigation, route }) => {
             keyboardType='decimal-pad'
             returnKeyType='next'
             value={formState.inputValues.price}
-            onChangeText={(input) => textChangeHandler('price', input)}
+            onChangeText={(input: string) => textChangeHandler('price', input)}
           />
         )}
         <Input
@@ -228,7 +229,9 @@ const EditProductScreen = ({ navigation, route }) => {
           autoCorrect
           multiline
           value={formState.inputValues.description}
-          onChangeText={(input) => textChangeHandler('description', input)}
+          onChangeText={(input: string) =>
+            textChangeHandler('description', input)
+          }
         />
         <View
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}

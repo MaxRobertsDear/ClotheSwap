@@ -1,11 +1,12 @@
 import Product from '../../models/product'
 
-interface AvailableProducts {
+interface Products {
   availableProducts: Array<Product>;
+  userProducts: Array<Product>;
 }
 
 interface RootState {
-  products: AvailableProducts;
+  products: Products;
 }
 
 export { RootState }
