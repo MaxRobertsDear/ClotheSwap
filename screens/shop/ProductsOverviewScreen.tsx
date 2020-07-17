@@ -15,14 +15,7 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
 import Product from '../../models/product'
-
-interface AvailableProducts {
-  availableProducts: Array<Product>;
-}
-
-interface RootState {
-  products: AvailableProducts;
-}
+import { RootState } from './index.d'
 
 const ProductsOverviewScreen = ({ navigation }: any) => {
   const products = useSelector(

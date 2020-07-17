@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Colors from '../../constants/Colors'
 import * as cartActions from '../../store/actions/cart'
+import { RootState } from './index.d'
 
-const ProductDetailScreen = ({ navigation, route }) => {
+const ProductDetailScreen = ({ navigation, route }: any) => {
   const productId = route.params.productId
-  const selectedProduct = useSelector((state) =>
+  const selectedProduct = useSelector((state: RootState) =>
     state.products.availableProducts.find((prod) => prod.id === productId),
   )
   const dispatch = useDispatch()
@@ -20,18 +21,29 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
   return (
     <ScrollView>
-      <Image style={styles.image} source={{ uri: selectedProduct.imageUrl }} />
+      <Image
+        style={styles.image}
+        source={{ uri: selectedProduct && selectedProduct.imageUrl }}
+      />
       <View style={styles.action}>
         <Button
           color={Colors.primary}
           title='Add to Cart'
           onPress={() => {
-            dispatch(cartActions.addToCart(selectedProduct))
+            if (selectedProduct) {
+              dispatch(cartActions.addToCart(selectedProduct))
+            } else {
+              return
+            }
           }}
         />
       </View>
-      <Text style={styles.price}>£{selectedProduct.price.toFixed(2)}</Text>
-      <Text style={styles.description}>{selectedProduct.description}</Text>
+      <Text style={styles.price}>
+        £{selectedProduct && selectedProduct.price.toFixed(2)}
+      </Text>
+      <Text style={styles.description}>
+        {selectedProduct && selectedProduct.description}
+      </Text>
     </ScrollView>
   )
 }
