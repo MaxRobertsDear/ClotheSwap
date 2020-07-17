@@ -2,13 +2,14 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cart'
 import { ADD_ORDER } from '../actions/orders'
 import CartItem from '../../models/cart-item'
 import { DELETE_PRODUCT } from '../actions/products'
+import { CartState, CartActionTypes } from './cart.d'
 
-const initialSate = {
-  items: {},
+const initialSate: CartState = {
+  items: [],
   totalAmount: 0,
 }
 
-export default (state = initialSate, action) => {
+export default (state = initialSate, action: CartActionTypes) => {
   switch (action.type) {
     case ADD_TO_CART:
       const addedProduct = action.product
@@ -72,7 +73,7 @@ export default (state = initialSate, action) => {
         items: updatedItems,
         totalAmount: state.totalAmount - itemTotal,
       }
+    default:
+      return state
   }
-
-  return state
 }
