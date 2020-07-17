@@ -8,9 +8,7 @@ import * as firebase from 'firebase'
 
 import { firebaseConfig } from './api-config'
 import productsReducer from './store/reducers/products'
-// @ts-ignore
 import cartReducer from './store/reducers/cart'
-// @ts-ignore
 import ordersReducer from './store/reducers/order'
 import authReducer from './store/reducers/auth'
 // @ts-ignore

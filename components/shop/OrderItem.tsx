@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, Button } from 'react-native'
 import Colors from '../../constants/Colors'
-import CartItem from '../../components/shop/CartItem'
+import CartItem from './CartItem'
 import Card from '../UI/Card'
+import CartItemModel from '../../models/cart-item'
 
-const OrderItem = (props) => {
+interface iOrderItem {
+  amount: number;
+  date: string;
+  items: any;
+}
+
+const OrderItem = ({ amount, date, items }: iOrderItem) => {
   const [showDetails, setShowDetails] = useState(false)
   return (
     <Card style={styles.orderItem}>
       <View style={styles.summary}>
-        <Text style={styles.totalAmount}>${props.amount}</Text>
-        <Text style={styles.date}>{props.date}</Text>
+        <Text style={styles.totalAmount}>${amount}</Text>
+        <Text style={styles.date}>{date}</Text>
       </View>
       <Button
         color={Colors.primary}
@@ -19,7 +26,7 @@ const OrderItem = (props) => {
       />
       {showDetails && (
         <View style={styles.viewDetails}>
-          {props.items.map((cartItem) => (
+          {items.map((cartItem: CartItemModel) => (
             <CartItem
               key={cartItem.productId}
               quantity={cartItem.quantity}

@@ -7,19 +7,22 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
 
 import * as cartActions from '../../store/actions/cart'
 import * as ordersActions from '../../store/actions/orders'
 import Colors from '../../constants/Colors'
 import CartItem from '../../components/shop/CartItem'
 import Card from '../../components/UI/Card'
+import { RootState } from '../../App'
 
 const CartScreen = () => {
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
-  const cartTotalAmount = useSelector((state) => state.cart.totalAmount)
-  const cartItems = useSelector((state) => {
+  const cartTotalAmount = useSelector(
+    (state: RootState) => state.cart.totalAmount,
+  )
+  const cartItems = useSelector((state: RootState) => {
     const transformedCartItems = []
     for (const key in state.cart.items) {
       transformedCartItems.push({

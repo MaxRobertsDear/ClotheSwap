@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { View, StyleSheet } from 'react-native'
 
-const Card = (props: any) => {
-  return (
-    <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
-  )
+interface iCard {
+  style: any;
+  children: ReactNode;
+}
+
+const Card = ({ style, children }: iCard) => {
+  return <View style={{ ...styles.card, ...style }}>{children}</View>
 }
 
 const styles = StyleSheet.create({

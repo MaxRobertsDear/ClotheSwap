@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import {
   StyleSheet,
   View,
@@ -10,19 +10,26 @@ import {
 
 import Card from '../UI/Card'
 
-const ProductItem = (props) => {
+interface iProductItem {
+  image: string;
+  title: string;
+  price: number;
+  children: ReactNode;
+}
+
+const ProductItem = ({ image, title, price, children }: iProductItem) => {
   return (
     <Card style={styles.product}>
       <View style={styles.touchable}>
         <View>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: props.image }} />
+            <Image style={styles.image} source={{ uri: image }} />
           </View>
           <View style={styles.details}>
-            <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.price}>£{props.price.toFixed(2)}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.price}>£{price.toFixed(2)}</Text>
           </View>
-          <View style={styles.actions}>{props.children}</View>
+          <View style={styles.actions}>{children}</View>
         </View>
       </View>
     </Card>

@@ -6,9 +6,12 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import ProductItem from '../../components/shop/ProductItem'
 import Colors from '../../constants/Colors'
 import * as productActions from '../../store/actions/products'
+import { RootState } from '../shop/index.d'
 
-const UserProductsScreen = ({ navigation }) => {
-  const userProducts = useSelector((state) => state.products.userProducts)
+const UserProductsScreen = ({ navigation }: any) => {
+  const userProducts = useSelector(
+    (state: RootState) => state.products.userProducts,
+  )
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {
@@ -36,7 +39,7 @@ const UserProductsScreen = ({ navigation }) => {
     })
   }, [navigation])
 
-  const deleteHandler = (id) => {
+  const deleteHandler = (id: string) => {
     Alert.alert('Are you sure?', 'Do you really want to delte this item?', [
       { text: 'No', style: 'default' },
       {
@@ -49,7 +52,7 @@ const UserProductsScreen = ({ navigation }) => {
     ])
   }
 
-  const editProductHandler = (id) => {
+  const editProductHandler = (id: string) => {
     navigation.navigate('EditProductsScreen', { productId: id })
   }
 

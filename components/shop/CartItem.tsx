@@ -4,24 +4,31 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Colors from '../../constants/Colors'
 
-const CartItem = (props) => {
+interface iCartItem {
+  quantity: number;
+  title: string;
+  amount: number;
+  deletable?: boolean;
+  onRemove?: () => void
+}
+
+const CartItem = ({ quantity, title, amount, deletable, onRemove }: iCartItem) => {
   return (
     <View style={styles.cartItem}>
       <View style={styles.itemData}>
-        <Text style={styles.quantity}>{props.quantity} </Text>
-        <Text style={styles.mainText}>{props.title}</Text>
+        <Text style={styles.quantity}>{quantity} </Text>
+        <Text style={styles.mainText}>{title}</Text>
       </View>
       <View style={styles.itemData}>
-        <Text style={styles.mainText}>£{props.amount.toFixed(2)}</Text>
-        {props.deletable && (
+        <Text style={styles.mainText}>£{amount.toFixed(2)}</Text>
+        {deletable && (
           <Icon.Button
             // eslint-disable-next-line react/prop-types
-            onPress={props.onRemove}
+            onPress={onRemove}
             name='trash'
             backgroundColor='white'
             color={Platform.OS === 'android' ? 'white' : Colors.primary}
             size={23}
-            TouchableComponent
           ></Icon.Button>
         )}
       </View>
