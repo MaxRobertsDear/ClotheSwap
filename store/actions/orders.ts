@@ -1,9 +1,11 @@
 import Order from '../../models/order'
+import { AppThunk } from './index.d'
+import Cartitem from '../../models/cart-item'
 
 export const ADD_ORDER = 'ADD_ORDER'
 export const SET_ORDERS = 'SET_ORDERS'
 
-export const fetchOrders = () => {
+export const fetchOrders = (): AppThunk => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
@@ -33,7 +35,10 @@ export const fetchOrders = () => {
   }
 }
 
-export const addOrders = (cartItems, totalAmount) => {
+export const addOrders = (
+  cartItems: Cartitem[],
+  totalAmount: number,
+): AppThunk => {
   return async (dispatch, getState) => {
     const date = new Date()
     const response = await fetch(

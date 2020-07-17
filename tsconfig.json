@@ -13,6 +13,6 @@
     "checkJs": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "target": "esnext"
+    "target": "esnext",
   }
 }

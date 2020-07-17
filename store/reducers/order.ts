@@ -1,11 +1,12 @@
 import { ADD_ORDER, SET_ORDERS } from '../actions/orders'
 import Order from '../../models/order'
+import { OrdersState, OrderActionTypes } from './order.d'
 
-const initialState = {
+const initialState: OrdersState = {
   orders: [],
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: OrderActionTypes) => {
   switch (action.type) {
     case SET_ORDERS:
       return {
