@@ -129,7 +129,7 @@ export const updateProduct = (
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${
-        getState().auth.userId
+        getState().auth.token
       }`,
       {
         method: 'PATCH',
