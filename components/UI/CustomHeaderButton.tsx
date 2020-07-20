@@ -13,7 +13,6 @@ const CustomHeaderButton = ({ iconName, ...props }: iCustomeHeaderButton) => {
   return (
     <Icon.Button
       {...props}
-      // eslint-disable-next-line react/prop-types
       name={iconName}
       backgroundColor={Platform.OS === 'android' ? Colors.primary : 'white'}
       color={Platform.OS === 'android' ? 'white' : Colors.primary}
