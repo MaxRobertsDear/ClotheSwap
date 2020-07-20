@@ -5,7 +5,11 @@ import { Platform } from 'react-native'
 import AuthScreen from '../screens/user/AuthScreen'
 import Colors from '../constants/Colors'
 
-const Stack = createStackNavigator()
+type StackParamList = {
+  AuthScreen: undefined,
+}
+
+const Stack = createStackNavigator<StackParamList>()
 
 const AuthNavigator = () => {
   return (

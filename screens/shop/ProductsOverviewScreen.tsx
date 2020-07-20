@@ -16,8 +16,25 @@ import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
 import Product from '../../models/product'
 import { RootState } from './index.d'
+import {
+  HomeStackParamList,
+  ShopDrawerParamList,
+} from '../../navigation/ShopNavigator'
 
-const ProductsOverviewScreen = ({ navigation }: any) => {
+import { StackNavigationProp } from '@react-navigation/stack'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
+import { CompositeNavigationProp } from '@react-navigation/native'
+
+type ProductsOverviewScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<HomeStackParamList>,
+  DrawerNavigationProp<ShopDrawerParamList, 'Home'>,
+>
+
+type Props = {
+  navigation: ProductsOverviewScreenNavigationProp,
+}
+
+const ProductsOverviewScreen = ({ navigation }: Props) => {
   const products = useSelector(
     (state: RootState) => state.products.availableProducts,
   )
