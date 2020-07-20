@@ -13,13 +13,21 @@ import UserProductsScreen from '../screens/user/UserProductsScreen'
 import EditProductsScreen from '../screens/user/EditProductScreen'
 import * as authActions from '../store/actions/auth'
 
-const Drawer = createDrawerNavigator()
-const Stack = createStackNavigator()
+export type HomeStackParamList = {
+  ProductsOverview: undefined,
+  ProductDetails: {
+    productId: string,
+    productTitle: string,
+  },
+  CartScreen: undefined,
+}
+
+const HomeStack = createStackNavigator<HomeStackParamList>()
 
 const Home = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <HomeStack.Navigator>
+      <HomeStack.Screen
         name='ProductsOverview'
         component={ProductsOverviewScreen}
         options={{
@@ -34,7 +42,7 @@ const Home = () => {
           },
         }}
       />
-      <Stack.Screen
+      <HomeStack.Screen
         name='ProductDetails'
         component={ProductDetailScreen}
         options={{
@@ -48,7 +56,7 @@ const Home = () => {
           },
         }}
       />
-      <Stack.Screen
+      <HomeStack.Screen
         name='CartScreen'
         component={CartScreen}
         options={{
@@ -63,14 +71,20 @@ const Home = () => {
           },
         }}
       />
-    </Stack.Navigator>
+    </HomeStack.Navigator>
   )
 }
 
+type AdminStackParamList = {
+  UserProductsScreen: undefined,
+  EditProductsScreen: undefined,
+}
+const AdminStack = createStackNavigator<AdminStackParamList>()
+
 const Admin = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <AdminStack.Navigator>
+      <AdminStack.Screen
         name='UserProductsScreen'
         component={UserProductsScreen}
         options={{
@@ -85,7 +99,7 @@ const Admin = () => {
           },
         }}
       />
-      <Stack.Screen
+      <AdminStack.Screen
         name='EditProductsScreen'
         component={EditProductsScreen}
         options={{
@@ -100,14 +114,19 @@ const Admin = () => {
           },
         }}
       />
-    </Stack.Navigator>
+    </AdminStack.Navigator>
   )
 }
 
+type OrdersStackParamList = {
+  OrdersScreen: undefined,
+}
+const OrdersStack = createStackNavigator<OrdersStackParamList>()
+
 const Orders = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <OrdersStack.Navigator>
+      <OrdersStack.Screen
         name='OrdersScreen'
         component={OrdersScreen}
         options={{
@@ -122,20 +141,28 @@ const Orders = () => {
           },
         }}
       />
-    </Stack.Navigator>
+    </OrdersStack.Navigator>
   )
 }
+
+export type ShopDrawerParamList = {
+  Home: undefined,
+  Orders: undefined,
+  Admin: undefined,
+}
+const ShopDrawer = createDrawerNavigator<ShopDrawerParamList>()
 
 const ShopNavigator = () => {
   const dispatch = useDispatch()
 
   return (
-    <Drawer.Navigator
+    <ShopDrawer.Navigator
       initialRouteName='Home'
       drawerType='slide'
       drawerContent={(props) => {
         return (
           <View style={{ flex: 1, paddingTop: 20 }}>
+            {/* @ts-ignore */}
             <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
               <DrawerItemList {...props} />
               <Button
@@ -150,10 +177,10 @@ const ShopNavigator = () => {
         )
       }}
     >
-      <Drawer.Screen name='Home' component={Home} />
-      <Drawer.Screen name='Orders' component={Orders} />
-      <Drawer.Screen name='Admin' component={Admin} />
-    </Drawer.Navigator>
+      <ShopDrawer.Screen name='Home' component={Home} />
+      <ShopDrawer.Screen name='Orders' component={Orders} />
+      <ShopDrawer.Screen name='Admin' component={Admin} />
+    </ShopDrawer.Navigator>
   )
 }
 
