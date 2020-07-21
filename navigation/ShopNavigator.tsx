@@ -12,15 +12,12 @@ import OrdersScreen from '../screens/shop/OrdersScreen'
 import UserProductsScreen from '../screens/user/UserProductsScreen'
 import EditProductsScreen from '../screens/user/EditProductScreen'
 import * as authActions from '../store/actions/auth'
-
-export type HomeStackParamList = {
-  ProductsOverview: undefined,
-  ProductDetails: {
-    productId: string,
-    productTitle: string,
-  },
-  CartScreen: undefined,
-}
+import {
+  HomeStackParamList,
+  AdminStackParamList,
+  OrdersStackParamList,
+  ShopDrawerParamList,
+} from './paramList'
 
 const HomeStack = createStackNavigator<HomeStackParamList>()
 
@@ -75,10 +72,6 @@ const Home = () => {
   )
 }
 
-type AdminStackParamList = {
-  UserProductsScreen: undefined,
-  EditProductsScreen: undefined,
-}
 const AdminStack = createStackNavigator<AdminStackParamList>()
 
 const Admin = () => {
@@ -118,9 +111,6 @@ const Admin = () => {
   )
 }
 
-type OrdersStackParamList = {
-  OrdersScreen: undefined,
-}
 const OrdersStack = createStackNavigator<OrdersStackParamList>()
 
 const Orders = () => {
@@ -145,16 +135,10 @@ const Orders = () => {
   )
 }
 
-export type ShopDrawerParamList = {
-  Home: undefined,
-  Orders: undefined,
-  Admin: undefined,
-}
 const ShopDrawer = createDrawerNavigator<ShopDrawerParamList>()
 
 const ShopNavigator = () => {
   const dispatch = useDispatch()
-
   return (
     <ShopDrawer.Navigator
       initialRouteName='Home'

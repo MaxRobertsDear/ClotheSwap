@@ -9,10 +9,16 @@ interface iCartItem {
   title: string;
   amount: number;
   deletable?: boolean;
-  onRemove?: () => void
+  onRemove?: () => void;
 }
 
-const CartItem = ({ quantity, title, amount, deletable, onRemove }: iCartItem) => {
+const CartItem = ({
+  quantity,
+  title,
+  amount,
+  deletable,
+  onRemove,
+}: iCartItem) => {
   return (
     <View style={styles.cartItem}>
       <View style={styles.itemData}>
