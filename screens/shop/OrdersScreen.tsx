@@ -17,7 +17,7 @@ import { RootState } from '../../App'
 import {
   OrdersStackParamList,
   ShopDrawerParamList,
-} from '../../navigation/ShopNavigator'
+} from '../../navigation/paramList'
 import { CompositeNavigationProp } from '@react-navigation/native'
 import { DrawerNavigationProp } from '@react-navigation/drawer'
 

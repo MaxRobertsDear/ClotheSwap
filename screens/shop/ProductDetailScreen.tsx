@@ -12,7 +12,7 @@ import { RootState } from './index.d'
 import {
   HomeStackParamList,
   ShopDrawerParamList,
-} from '../../navigation/ShopNavigator'
+} from '../../navigation/paramList'
 
 type ProductDetailsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<HomeStackParamList, 'ProductDetails'>,

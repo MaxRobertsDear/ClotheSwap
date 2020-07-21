@@ -15,7 +15,7 @@ import {
   ActivityIndicator,
   Text,
 } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -30,7 +30,7 @@ import { RootState } from '../shop/index.d'
 import {
   AdminStackParamList,
   ShopDrawerParamList,
-} from '../../navigation/ShopNavigator'
+} from '../../navigation/paramList'
 
 type UserProductsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<AdminStackParamList, 'EditProductsScreen'>,
@@ -49,7 +49,10 @@ type Props = {
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-const formReducer = (state: any, action: any) => {
+const formReducer = (
+  state: RootStateOrAny,
+  action: { type: string, input: string, value: string, isValid: boolean },
+) => {
   if (action.type === FORM_INPUT_UPDATE) {
     const updatedValues = {
       ...state.inputValues,

@@ -13,7 +13,7 @@ import { RootState } from '../shop/index.d'
 import {
   AdminStackParamList,
   ShopDrawerParamList,
-} from '../../navigation/ShopNavigator'
+} from '../../navigation/paramList'
 
 type UserProductsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<AdminStackParamList, 'UserProductsScreen'>,

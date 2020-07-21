@@ -18,8 +18,21 @@ import * as authActions from '../../store/actions/auth'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
+interface iInputValues {
+  email: string;
+  password: string;
+}
+
+interface iInputValidities {
+  [key: string]: boolean;
+}
+
 const formReducer = (
-  state: { inputValues: any, inputValidities: any, formIsValid: boolean },
+  state: {
+    inputValues: iInputValues,
+    inputValidities: iInputValidities,
+    formIsValid: boolean,
+  },
   action: { type: string, input: string, value: string, isValid: boolean },
 ) => {
   if (action.type === FORM_INPUT_UPDATE) {
@@ -31,6 +44,7 @@ const formReducer = (
       ...state.inputValidities,
       [action.input]: action.isValid,
     }
+    console.log('updated validities', updatedValidities)
     let updatedFormIsValid = true
     for (const key in updatedValidities) {
       updatedFormIsValid = updatedFormIsValid && updatedValidities[key]
