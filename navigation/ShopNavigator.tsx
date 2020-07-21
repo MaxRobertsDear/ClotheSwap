@@ -118,7 +118,7 @@ const Admin = () => {
   )
 }
 
-type OrdersStackParamList = {
+export type OrdersStackParamList = {
   OrdersScreen: undefined,
 }
 const OrdersStack = createStackNavigator<OrdersStackParamList>()
