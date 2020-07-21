@@ -1,12 +1,35 @@
 import React, { useLayoutEffect } from 'react'
 import { Text, StyleSheet, View, Image, Button, ScrollView } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
+import { CompositeNavigationProp } from '@react-navigation/native'
+import { RouteProp } from '@react-navigation/native'
 
 import Colors from '../../constants/Colors'
 import * as cartActions from '../../store/actions/cart'
 import { RootState } from './index.d'
+import {
+  HomeStackParamList,
+  ShopDrawerParamList,
+} from '../../navigation/ShopNavigator'
 
-const ProductDetailScreen = ({ navigation, route }: any) => {
+type ProductDetailsScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<HomeStackParamList, 'ProductDetails'>,
+  DrawerNavigationProp<ShopDrawerParamList>,
+>
+
+type ProductDetailsScreenRouteProp = RouteProp<
+  HomeStackParamList,
+  'ProductDetails',
+>
+
+type Props = {
+  navigation: ProductDetailsScreenNavigationProp,
+  route: ProductDetailsScreenRouteProp,
+}
+
+const ProductDetailScreen = ({ navigation, route }: Props) => {
   const productId = route.params.productId
   const selectedProduct = useSelector((state: RootState) =>
     state.products.availableProducts.find((prod) => prod.id === productId),

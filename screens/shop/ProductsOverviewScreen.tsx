@@ -8,6 +8,9 @@ import {
   View,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
+import { CompositeNavigationProp } from '@react-navigation/native'
 
 import ProductItem from '../../components/shop/ProductItem'
 import * as cartActions from '../../store/actions/cart'
@@ -21,12 +24,8 @@ import {
   ShopDrawerParamList,
 } from '../../navigation/ShopNavigator'
 
-import { StackNavigationProp } from '@react-navigation/stack'
-import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { CompositeNavigationProp } from '@react-navigation/native'
-
 type ProductsOverviewScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<HomeStackParamList>,
+  StackNavigationProp<HomeStackParamList, 'ProductsOverview'>,
   DrawerNavigationProp<ShopDrawerParamList, 'Home'>,
 >
 

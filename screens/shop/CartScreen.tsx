@@ -7,7 +7,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native'
-import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import * as cartActions from '../../store/actions/cart'
 import * as ordersActions from '../../store/actions/orders'

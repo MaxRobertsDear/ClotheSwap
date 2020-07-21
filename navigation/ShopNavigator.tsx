@@ -75,9 +75,9 @@ const Home = () => {
   )
 }
 
-type AdminStackParamList = {
+export type AdminStackParamList = {
   UserProductsScreen: undefined,
-  EditProductsScreen: undefined,
+  EditProductsScreen: { productId?: string },
 }
 const AdminStack = createStackNavigator<AdminStackParamList>()
 
