@@ -7,28 +7,13 @@ import {
   Text,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { StackNavigationProp } from '@react-navigation/stack'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import OrderItem from '../../components/shop/OrderItem'
 import * as ordersActions from '../../store/actions/orders'
 import Colors from '../../constants/Colors'
 import { RootState } from '../../App'
-import {
-  OrdersStackParamList,
-  ShopDrawerParamList,
-} from '../../navigation/paramList'
-import { CompositeNavigationProp } from '@react-navigation/native'
-import { DrawerNavigationProp } from '@react-navigation/drawer'
-
-type OrdersScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<OrdersStackParamList, 'OrdersScreen'>,
-  DrawerNavigationProp<ShopDrawerParamList, 'Orders'>,
->
-
-type Props = {
-  navigation: OrdersScreenNavigationProp,
-}
+import { Props } from './OrdersScreen.d'
 
 const OrdersScreen = ({ navigation }: Props) => {
   useLayoutEffect(() => {
