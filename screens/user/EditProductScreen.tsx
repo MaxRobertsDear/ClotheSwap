@@ -18,12 +18,35 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
 import Input from '../../components/UI/Input'
 import Colors from '../../constants/Colors'
 import { RootState } from '../shop/index.d'
+import {
+  AdminStackParamList,
+  ShopDrawerParamList,
+} from '../../navigation/ShopNavigator'
+
+type UserProductsScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<AdminStackParamList, 'EditProductsScreen'>,
+  DrawerNavigationProp<ShopDrawerParamList, 'Admin'>,
+>
+
+type UserProductsScreenRouteProp = RouteProp<
+  AdminStackParamList,
+  'EditProductsScreen',
+>
+
+type Props = {
+  navigation: UserProductsScreenNavigationProp,
+  route: UserProductsScreenRouteProp,
+}
+
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
 const formReducer = (state: any, action: any) => {
@@ -49,7 +72,7 @@ const formReducer = (state: any, action: any) => {
   return state
 }
 
-const EditProductScreen = ({ navigation, route }: any) => {
+const EditProductScreen = ({ navigation, route }: Props) => {
   const dispatch = useDispatch()
   const prodId = route.params && route.params.productId
   const editedProduct = useSelector((state: RootState) =>
