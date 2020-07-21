@@ -18,34 +18,13 @@ import {
 import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
-import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import * as productActions from '../../store/actions/products'
 import Input from '../../components/UI/Input'
 import Colors from '../../constants/Colors'
-import { RootState } from '../shop/index.d'
-import {
-  AdminStackParamList,
-  ShopDrawerParamList,
-} from '../../navigation/paramList'
-
-type UserProductsScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<AdminStackParamList, 'EditProductsScreen'>,
-  DrawerNavigationProp<ShopDrawerParamList, 'Admin'>,
->
-
-type UserProductsScreenRouteProp = RouteProp<
-  AdminStackParamList,
-  'EditProductsScreen',
->
-
-type Props = {
-  navigation: UserProductsScreenNavigationProp,
-  route: UserProductsScreenRouteProp,
-}
+import { RootState } from '../ProductsRootState.d'
+import { Props } from './EditProductScreen.d'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 

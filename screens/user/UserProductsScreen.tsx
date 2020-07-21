@@ -1,28 +1,13 @@
 import React, { useLayoutEffect } from 'react'
 import { FlatList, Button, Alert, View, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { CompositeNavigationProp } from '@react-navigation/native'
-import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import ProductItem from '../../components/shop/ProductItem'
 import Colors from '../../constants/Colors'
 import * as productActions from '../../store/actions/products'
-import { RootState } from '../shop/index.d'
-import {
-  AdminStackParamList,
-  ShopDrawerParamList,
-} from '../../navigation/paramList'
-
-type UserProductsScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<AdminStackParamList, 'UserProductsScreen'>,
-  DrawerNavigationProp<ShopDrawerParamList, 'Admin'>,
->
-
-type Props = {
-  navigation: UserProductsScreenNavigationProp,
-}
+import { RootState } from '../ProductsRootState.d'
+import { Props } from './UserProductsScreen.d'
 
 const UserProductsScreen = ({ navigation }: Props) => {
   const userProducts = useSelector(

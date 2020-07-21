@@ -8,9 +8,6 @@ import {
   View,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { CompositeNavigationProp } from '@react-navigation/native'
 
 import ProductItem from '../../components/shop/ProductItem'
 import * as cartActions from '../../store/actions/cart'
@@ -18,20 +15,8 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
 import Product from '../../models/product'
-import { RootState } from './index.d'
-import {
-  HomeStackParamList,
-  ShopDrawerParamList,
-} from '../../navigation/paramList'
-
-type ProductsOverviewScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<HomeStackParamList, 'ProductsOverview'>,
-  DrawerNavigationProp<ShopDrawerParamList, 'Home'>,
->
-
-type Props = {
-  navigation: ProductsOverviewScreenNavigationProp,
-}
+import { RootState } from '../ProductsRootState.d'
+import { Props } from './ProductsOverviewScreen.d'
 
 const ProductsOverviewScreen = ({ navigation }: Props) => {
   const products = useSelector(
