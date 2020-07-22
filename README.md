@@ -6,9 +6,11 @@
 > - lower your carbon footprint
 > - reduce the amount of clothes destined for landfill
 
-<p align="center">
-![Demo](README-assets/demo.gif)
----
+<p align='center'>
+<a target="_blank"><img src="README-assets/demo.gif" 
+alt="Demo" width="207" height="448" alig /></a>
+</p>
+
 
 ## Installation
 
