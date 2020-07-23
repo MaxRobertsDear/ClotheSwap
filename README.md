@@ -13,7 +13,11 @@ alt="Demo" width="207" height="448" alig /></a>
 
 
 ## Installation
+### Running the latest release on your phone
+Step 1. Download the Expo client from Play Store or App Store
+Step 2. Scan the QR code with your devices camera: https://expo.io/@maxrobertsdear/ClotheSwap?release-channel=staging-v2
 
+### For development purposes
 #### Dependencies
 - [iOS Simulator](https://docs.expo.io/workflow/ios-simulator/)
 - [Android Studio Emulator](https://docs.expo.io/workflow/android-studio-emulator/)
