@@ -44,7 +44,6 @@ const formReducer = (
       ...state.inputValidities,
       [action.input]: action.isValid,
     }
-    console.log('updated validities', updatedValidities)
     let updatedFormIsValid = true
     for (const key in updatedValidities) {
       updatedFormIsValid = updatedFormIsValid && updatedValidities[key]

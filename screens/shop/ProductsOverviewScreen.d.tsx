@@ -15,4 +15,4 @@ type Props = {
   navigation: ProductsOverviewScreenNavigationProp,
 }
 
-export { Props }
+export type { Props }

@@ -21,4 +21,4 @@ type Props = {
   route: UserProductsScreenRouteProp,
 }
 
-export { Props }
+export type { Props }

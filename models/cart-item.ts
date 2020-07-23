@@ -3,19 +3,19 @@ class CartItem {
   productPrice: number
   productTitle: string
   sum: number
-  // productId: string
+  productId: string
   constructor(
     quantity: number,
     productPrice: number,
     productTitle: string,
     sum: number,
-    // productId: string
+    productId: string,
   ) {
     this.quantity = quantity
     this.productPrice = productPrice
     this.productTitle = productTitle
     this.sum = sum
-    // this.productId = productId
+    this.productId = productId
   }
 }
 
