@@ -29,7 +29,6 @@ const CartItem = ({
         <Text style={styles.mainText}>£{amount.toFixed(2)}</Text>
         {deletable && (
           <Icon.Button
-            // eslint-disable-next-line react/prop-types
             onPress={onRemove}
             name='trash'
             backgroundColor='white'

@@ -1,7 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { CompositeNavigationProp } from '@react-navigation/native'
-import { RouteProp } from '@react-navigation/native'
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import {
   HomeStackParamList,
   ShopDrawerParamList,

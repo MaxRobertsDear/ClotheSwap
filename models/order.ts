@@ -11,7 +11,6 @@ class Order {
     this.totalAmount = totalAmount
     this.date = date
   }
-  // @ts-ignore
   get readableDate() {
     return this.date.toLocaleDateString('en-EN', {
       year: 'numeric',

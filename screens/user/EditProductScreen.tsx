@@ -60,10 +60,9 @@ const EditProductScreen = ({ navigation, route }: Props) => {
   const editedProduct = useSelector((state: RootState) =>
     state.products.userProducts.find((prod) => prod.id === prodId),
   )
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError]: any = useState()
+  const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [imageUrl, setImageUrl]: any = useState()
+  const [imageUrl, setImageUrl] = useState()
 
   useEffect(() => {
     getPermissionAsync()
@@ -78,7 +77,7 @@ const EditProductScreen = ({ navigation, route }: Props) => {
   const getPermissionAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
     if (status !== 'granted') {
-      alert('Sorry, we need camera roll permissions to make this work!')
+      Alert.alert('Sorry, we need camera roll permissions to make this work!')
     }
   }
 
@@ -174,7 +173,6 @@ const EditProductScreen = ({ navigation, route }: Props) => {
         setImageUrl(result.uri)
         textChangeHandler('imageUrl', result.uri)
       }
-      // console.log(result)
     } catch (E) {
       console.log(E)
     }

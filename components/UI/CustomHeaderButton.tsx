@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
