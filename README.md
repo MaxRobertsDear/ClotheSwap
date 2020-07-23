@@ -7,7 +7,7 @@
 > - reduce the amount of clothes destined for landfill
 
 <p align='center'>
-<a target="_blank"><img src="README-assets/demo.gif" 
+<a target="_blank"><img src="README-assets/demo1.gif" 
 alt="Demo" width="207" height="448" alig /></a>
 </p>
 
