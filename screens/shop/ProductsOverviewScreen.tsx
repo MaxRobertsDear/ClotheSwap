@@ -117,6 +117,7 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       refreshing={isRefreshing}
       data={products}
       numColumns={2}
+      showsVerticalScrollIndicator={false}
       renderItem={(itemData) => (
         <ProductItem
           title={itemData.item.title}
