@@ -3,18 +3,15 @@ import {
   StyleSheet,
   Text,
   FlatList,
-  Button,
   ActivityIndicator,
   View,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ProductItem from '../../components/shop/ProductItem'
-import * as cartActions from '../../store/actions/cart'
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
-import Product from '../../models/product'
 import { RootState } from '../ProductsRootState.d'
 import { Props } from './ProductsOverviewScreen.d'
 
@@ -80,10 +77,6 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
     })
   }
 
-  const addToCartHandler = (item: Product) => {
-    dispatch(cartActions.addToCart(item))
-  }
-
   if (error) {
     return (
       <View style={styles.centered}>
@@ -116,29 +109,15 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       onRefresh={loadProducts}
       refreshing={isRefreshing}
       data={products}
-      numColumns={2}
+      numColumns={3}
       showsVerticalScrollIndicator={false}
       renderItem={(itemData) => (
         <ProductItem
-          title={itemData.item.title}
-          price={itemData.item.price}
           image={itemData.item.imageUrl}
-        >
-          <Button
-            color={Colors.primary}
-            title='View Details'
-            onPress={() => {
-              selectItemHandler(itemData.item.id, itemData.item.title)
-            }}
-          />
-          <Button
-            color={Colors.primary}
-            title='Add to Cart'
-            onPress={() => {
-              addToCartHandler(itemData.item)
-            }}
-          />
-        </ProductItem>
+          onClick={() => {
+            selectItemHandler(itemData.item.id, itemData.item.title)
+          }}
+        />
       )}
     />
   )
