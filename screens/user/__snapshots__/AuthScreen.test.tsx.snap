@@ -74,9 +74,7 @@ exports[`renders correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           autoCapitalize="none"
-          errorText={true}
           keyboardType="email-address"
-          label="Email"
           onChangeText={[Function]}
           placeholder="example@example.com"
           rejectResponderTermination={true}
@@ -113,9 +111,7 @@ exports[`renders correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           autoCapitalize="none"
-          errorText={true}
           keyboardType="default"
-          label="Password"
           minLength={5}
           onChangeText={[Function]}
           placeholder="minimum 6 characters"

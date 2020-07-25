@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
@@ -7,10 +7,7 @@ import ReduxThunk from 'redux-thunk'
 import * as firebase from 'firebase'
 
 import { firebaseConfig } from './api-config'
-import productsReducer from './store/reducers/products'
-import cartReducer from './store/reducers/cart'
-import ordersReducer from './store/reducers/order'
-import authReducer from './store/reducers/auth'
+import rootReducer from './store/reducers'
 import AppNavigator from './navigation/AppNavigator'
 
 const fetchFonts = () => {
@@ -21,13 +18,6 @@ const fetchFonts = () => {
 }
 
 firebase.initializeApp(firebaseConfig)
-
-export const rootReducer = combineReducers({
-  products: productsReducer,
-  cart: cartReducer,
-  orders: ordersReducer,
-  auth: authReducer,
-})
 
 export type RootState = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))

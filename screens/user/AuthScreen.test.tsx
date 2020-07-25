@@ -1,36 +1,10 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import React from 'react'
 import { Alert } from 'react-native'
-import AuthScreen from './AuthScreen'
-import {
-  render,
-  fireEvent,
-  waitFor,
-  RenderOptions,
-} from 'react-native-testing-library'
-import { createStore, Store } from 'redux'
-import { Provider } from 'react-redux'
-import { rootReducer } from '../../App'
+import { fireEvent, waitFor } from 'react-native-testing-library'
 import '@testing-library/jest-native/extend-expect'
+import { renderWithRedux } from '../../_testing/custom.render'
+import AuthScreen from './AuthScreen'
 
-interface ICustomRenderOptions extends RenderOptions {
-  initialState?: any;
-  store?: Store;
-}
-function renderWithRedux(
-  ui: ReactElement,
-  {
-    initialState,
-    store = createStore(rootReducer, initialState),
-    ...options
-  }: ICustomRenderOptions = {},
-) {
-  const Wrapper: FunctionComponent = ({ children }) => {
-    return <Provider store={store}>{children}</Provider>
-  }
-  return {
-    ...render(ui, { wrapper: Wrapper, ...options }),
-  }
-}
 test('renders correctly', async () => {
   const tree = renderWithRedux(<AuthScreen />)
   expect(tree).toMatchSnapshot()
