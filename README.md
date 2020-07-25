@@ -48,7 +48,8 @@ $ yarn web
 
 ## Technologies (Highlights)
 ### Dependencies
-- Expo Managed Workflow
+- <img src="README-assets/expo.jpg" 
+alt="Demo" width="25" height="15" alig />Expo Managed Workflow
 - React Native
 - React Navigation v5
 - Redux
