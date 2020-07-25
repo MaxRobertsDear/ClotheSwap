@@ -1,10 +1,10 @@
 # ClotheSwap
 
-> A fun and convenient way to update your wardrobe ...
->
->  ...whilst mitigating the damaging effects of fast fashion:
-> - lower your carbon footprint
-> - reduce the amount of clothes destined for landfill
+A fun and convenient way to update your wardrobe ...
+
+ ...whilst mitigating the damaging effects of fast fashion:
+- lower your carbon footprint
+- reduce the amount of clothes destined for landfill
 
 <p align='center'>
 <a target="_blank"><img src="README-assets/demo1.gif" 
@@ -50,12 +50,19 @@ $ yarn web
 ### Dependencies
 - <img src="README-assets/expo.jpg" 
 alt="Demo" width="25" height="15" alig />Expo Managed Workflow
-- React Native
-- React Navigation v5
-- Redux
+- <img src="README-assets/react.png" 
+alt="Demo" width="25" height="15" alig />React Native
+- <img src="README-assets/reactnav.svg" 
+alt="Demo" width="25" height="15" alig />React Navigation v5
+- <img src="README-assets/redux.jpg" 
+alt="Demo" width="25" height="15" alig />Redux
 ### Dev Dependencies
-- Typescript
-- React Native Testing Library
-- Husky (pre-commit hooks)
-- Prettier
+- <img src="README-assets/typescript.png" 
+alt="Demo" width="25" height="20" alig />Typescript
+- <img src="README-assets/reactnativetesting.jpeg" 
+alt="Demo" width="25" height="20" alig />React Native Testing Library
+- <img src="README-assets/husky.jpeg" 
+alt="Demo" width="25" height="20" alig />Husky (pre-commit hooks)
+- <img src="README-assets/prettier.png" 
+alt="Demo" width="25" height="20" alig />Prettier
 
