@@ -17,10 +17,14 @@ type OrdersStackParamList = {
   OrdersScreen: undefined,
 }
 
-type ShopDrawerParamList = {
+type ShopTabParamList = {
   Home: undefined,
   Orders: undefined,
   Admin: undefined,
+}
+
+type ShopDrawerParamList = {
+  Shop: undefined,
 }
 
 // AuthNavigator
@@ -32,6 +36,7 @@ export {
   HomeStackParamList,
   AdminStackParamList,
   OrdersStackParamList,
+  ShopTabParamList,
   ShopDrawerParamList,
   AuthStackParamList,
 }
