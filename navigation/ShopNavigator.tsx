@@ -1,6 +1,7 @@
 import React from 'react'
 import { Platform, Button, View, SafeAreaView } from 'react-native'
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch } from 'react-redux'
 
@@ -16,6 +17,7 @@ import {
   HomeStackParamList,
   AdminStackParamList,
   OrdersStackParamList,
+  ShopTabParamList,
   ShopDrawerParamList,
 } from './paramList'
 
@@ -135,6 +137,16 @@ const Orders = () => {
     </OrdersStack.Navigator>
   )
 }
+const ShopTab = createBottomTabNavigator<ShopTabParamList>()
+const ShopTabNavigator = () => {
+  return (
+    <ShopTab.Navigator>
+      <ShopTab.Screen name='Home' component={Home} />
+      <ShopTab.Screen name='Orders' component={Orders} />
+      <ShopTab.Screen name='Admin' component={Admin} />
+    </ShopTab.Navigator>
+  )
+}
 
 const ShopDrawer = createDrawerNavigator<ShopDrawerParamList>()
 
@@ -142,7 +154,7 @@ const ShopNavigator = () => {
   const dispatch = useDispatch()
   return (
     <ShopDrawer.Navigator
-      initialRouteName='Home'
+      initialRouteName='Shop'
       drawerType='slide'
       drawerContent={(props) => {
         return (
@@ -162,9 +174,7 @@ const ShopNavigator = () => {
         )
       }}
     >
-      <ShopDrawer.Screen name='Home' component={Home} />
-      <ShopDrawer.Screen name='Orders' component={Orders} />
-      <ShopDrawer.Screen name='Admin' component={Admin} />
+      <ShopDrawer.Screen name='Shop' component={ShopTabNavigator} />
     </ShopDrawer.Navigator>
   )
 }
