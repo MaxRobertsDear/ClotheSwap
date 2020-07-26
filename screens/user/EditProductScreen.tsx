@@ -219,6 +219,7 @@ const EditProductScreen = ({ navigation, route }: Props) => {
           returnKeyType='next'
           value={formState.inputValues.title}
           onChangeText={(input: string) => textChangeHandler('title', input)}
+          maxLength={18}
         />
         {/* 
         <Input

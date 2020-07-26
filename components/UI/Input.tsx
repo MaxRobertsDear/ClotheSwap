@@ -42,6 +42,7 @@ interface iInput {
   onChangeText?: (input: string) => void;
   autoCorrect?: boolean;
   multiline?: boolean;
+  maxLength?: number;
 }
 
 const Input = ({ label, errorText, ...props }: iInput) => {

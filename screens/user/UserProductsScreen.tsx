@@ -59,6 +59,8 @@ const UserProductsScreen = ({ navigation }: Props) => {
       numColumns={3}
       renderItem={(itemData) => (
         <ProductItem
+          title={itemData.item.title}
+          price={itemData.item.price}
           image={itemData.item.imageUrl}
           onClick={() => {
             editProductHandler(itemData.item.id)

@@ -1,5 +1,12 @@
 import React, { ReactNode } from 'react'
-import { StyleSheet, View, Image, Platform, Dimensions } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Image,
+  Platform,
+  Dimensions,
+  Text,
+} from 'react-native'
 
 import Card from '../UI/Card'
 import {
@@ -9,6 +16,8 @@ import {
 
 interface iProductItem {
   image: string;
+  title: string;
+  price: number;
   onClick: () => void;
 }
 
@@ -29,13 +38,19 @@ const TouchableFeedback = ({ children, onPress }: iTouchable) => {
   }
 }
 
-const ProductItem = ({ image, onClick }: iProductItem) => {
+const ProductItem = ({ image, title, price, onClick }: iProductItem) => {
   return (
     <Card style={styles.product}>
       <View style={styles.touchable}>
         <TouchableFeedback onPress={onClick}>
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={{ uri: image }} />
+          </View>
+          <View style={styles.details}>
+            <Text style={styles.title} numberOfLines={1}>
+              {title}
+            </Text>
+            <Text style={styles.price}>£{price.toFixed(2)}</Text>
           </View>
         </TouchableFeedback>
       </View>
@@ -64,6 +79,23 @@ const styles = StyleSheet.create({
     width: Platform.OS !== 'web' ? '100%' : 300,
     overflow: 'hidden',
     alignSelf: 'center',
+  },
+  details: {
+    display: 'flex',
+    width: Dimensions.get('screen').width / 3 - 5,
+    alignItems: 'center',
+    padding: 10,
+  },
+  title: {
+    textAlign: 'center',
+    fontFamily: 'open-sans-bold',
+    fontSize: 14,
+    marginVertical: 2,
+  },
+  price: {
+    fontFamily: 'open-sans-regular',
+    fontSize: 14,
+    color: '#888',
   },
 })
 

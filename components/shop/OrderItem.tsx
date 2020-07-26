@@ -16,7 +16,7 @@ const OrderItem = ({ amount, date, items }: iOrderItem) => {
   return (
     <Card style={styles.orderItem}>
       <View style={styles.summary}>
-        <Text style={styles.totalAmount}>${amount}</Text>
+        <Text style={styles.totalAmount}>£{amount}</Text>
         <Text style={styles.date}>{date}</Text>
       </View>
       <Button

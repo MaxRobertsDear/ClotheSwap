@@ -113,6 +113,8 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       showsVerticalScrollIndicator={false}
       renderItem={(itemData) => (
         <ProductItem
+          title={itemData.item.title}
+          price={itemData.item.price}
           image={itemData.item.imageUrl}
           onClick={() => {
             selectItemHandler(itemData.item.id, itemData.item.title)
