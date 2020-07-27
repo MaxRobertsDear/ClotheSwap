@@ -8,7 +8,7 @@ type HomeStackParamList = {
   CartScreen: undefined,
 }
 
-type AdminStackParamList = {
+type ProfileStackParamList = {
   UserProductsScreen: undefined,
   EditProductsScreen: { productId: string },
 }
@@ -19,12 +19,12 @@ type OrdersStackParamList = {
 
 type ShopTabParamList = {
   Home: undefined,
-  Orders: undefined,
-  Admin: undefined,
+  Profile: undefined,
 }
 
 type ShopDrawerParamList = {
   Shop: undefined,
+  Orders: undefined,
 }
 
 // AuthNavigator
@@ -34,7 +34,7 @@ type AuthStackParamList = {
 
 export {
   HomeStackParamList,
-  AdminStackParamList,
+  ProfileStackParamList,
   OrdersStackParamList,
   ShopTabParamList,
   ShopDrawerParamList,

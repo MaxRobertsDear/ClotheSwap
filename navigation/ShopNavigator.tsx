@@ -15,7 +15,7 @@ import EditProductsScreen from '../screens/user/EditProductScreen'
 import * as authActions from '../store/actions/auth'
 import {
   HomeStackParamList,
-  AdminStackParamList,
+  ProfileStackParamList,
   OrdersStackParamList,
   ShopTabParamList,
   ShopDrawerParamList,
@@ -75,12 +75,12 @@ const Home = () => {
   )
 }
 
-const AdminStack = createStackNavigator<AdminStackParamList>()
+const ProfileStack = createStackNavigator<ProfileStackParamList>()
 
-const Admin = () => {
+const Profile = () => {
   return (
-    <AdminStack.Navigator>
-      <AdminStack.Screen
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
         name='UserProductsScreen'
         component={UserProductsScreen}
         options={{
@@ -95,7 +95,7 @@ const Admin = () => {
           },
         }}
       />
-      <AdminStack.Screen
+      <ProfileStack.Screen
         name='EditProductsScreen'
         component={EditProductsScreen}
         options={{
@@ -110,7 +110,7 @@ const Admin = () => {
           },
         }}
       />
-    </AdminStack.Navigator>
+    </ProfileStack.Navigator>
   )
 }
 
@@ -142,8 +142,7 @@ const ShopTabNavigator = () => {
   return (
     <ShopTab.Navigator>
       <ShopTab.Screen name='Home' component={Home} />
-      <ShopTab.Screen name='Orders' component={Orders} />
-      <ShopTab.Screen name='Admin' component={Admin} />
+      <ShopTab.Screen name='Profile' component={Profile} />
     </ShopTab.Navigator>
   )
 }
@@ -175,6 +174,7 @@ const ShopNavigator = () => {
       }}
     >
       <ShopDrawer.Screen name='Shop' component={ShopTabNavigator} />
+      <ShopDrawer.Screen name='Orders' component={Orders} />
     </ShopDrawer.Navigator>
   )
 }
