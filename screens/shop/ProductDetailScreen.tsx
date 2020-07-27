@@ -1,5 +1,14 @@
 import React, { useLayoutEffect } from 'react'
-import { Text, StyleSheet, View, Image, Button, ScrollView } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Button,
+  ScrollView,
+  Dimensions,
+  Platform,
+} from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Colors from '../../constants/Colors'
@@ -22,10 +31,12 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <ScrollView>
-      <Image
-        style={styles.image}
-        source={{ uri: selectedProduct && selectedProduct.imageUrl }}
-      />
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.image}
+          source={{ uri: selectedProduct && selectedProduct.imageUrl }}
+        />
+      </View>
       <View style={styles.action}>
         <Button
           color={Colors.primary}
@@ -50,9 +61,12 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
 }
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    alignItems: 'center',
+  },
   image: {
-    height: 400,
-    width: '100%',
+    width: Platform.OS === 'web' ? 400 : '100%',
+    height: Platform.OS === 'web' ? 400 : Dimensions.get('window').width,
   },
   action: {
     alignItems: 'center',
