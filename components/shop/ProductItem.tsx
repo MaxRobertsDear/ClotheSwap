@@ -68,17 +68,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   imageContainer: {
-    width: Dimensions.get('screen').width / 3 - 5,
-    height: Dimensions.get('screen').width / 3 - 5,
+    width: Dimensions.get('window').width / 3 - 20,
+    height: Dimensions.get('window').width / 3 - 5,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     overflow: 'hidden',
   },
   image: {
-    height: Platform.OS !== 'web' ? '100%' : 200,
-    width: Platform.OS !== 'web' ? '100%' : 300,
+    height: '100%',
+    width: '100%',
     overflow: 'hidden',
     alignSelf: 'center',
+    resizeMode: 'cover',
   },
   details: {
     display: 'flex',
