@@ -52,6 +52,7 @@ const Home = () => {
           },
           headerTitleStyle: {
             alignSelf: 'center',
+            color: Platform.OS === 'android' ? 'white' : Colors.primary,
           },
         }}
       />

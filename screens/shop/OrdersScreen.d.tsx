@@ -8,7 +8,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 type OrdersScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<OrdersStackParamList, 'OrdersScreen'>,
-  DrawerNavigationProp<ShopDrawerParamList, 'Orders'>,
+  DrawerNavigationProp<ShopDrawerParamList, 'Shop'>,
 >
 
 type Props = {

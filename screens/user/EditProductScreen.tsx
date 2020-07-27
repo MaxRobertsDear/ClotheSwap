@@ -161,6 +161,20 @@ const EditProductScreen = ({ navigation, route }: Props) => {
     })
   }
 
+  const deleteHandler = (id: string) => {
+    Alert.alert('Are you sure?', 'Do you really want to delte this item?', [
+      { text: 'No', style: 'default' },
+      {
+        text: 'Yes',
+        style: 'destructive',
+        onPress: () => {
+          dispatch(productActions.deleteProduct(id))
+          navigation.navigate('UserProductsScreen')
+        },
+      },
+    ])
+  }
+
   const pickImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -205,6 +219,7 @@ const EditProductScreen = ({ navigation, route }: Props) => {
           returnKeyType='next'
           value={formState.inputValues.title}
           onChangeText={(input: string) => textChangeHandler('title', input)}
+          maxLength={18}
         />
         {/* 
         <Input
@@ -247,6 +262,11 @@ const EditProductScreen = ({ navigation, route }: Props) => {
             />
           )}
         </View>
+        <Button
+          color={Colors.primary}
+          title='Delete'
+          onPress={() => deleteHandler(route.params.productId)}
+        />
       </View>
     </ScrollView>
   )

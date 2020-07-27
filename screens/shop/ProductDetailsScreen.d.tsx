@@ -8,7 +8,7 @@ import {
 
 type ProductDetailsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<HomeStackParamList, 'ProductDetails'>,
-  DrawerNavigationProp<ShopDrawerParamList>,
+  DrawerNavigationProp<ShopDrawerParamList, 'Shop'>,
 >
 
 type ProductDetailsScreenRouteProp = RouteProp<
