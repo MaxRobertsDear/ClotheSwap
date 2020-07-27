@@ -20,7 +20,7 @@ const OrdersScreen = ({ navigation }: Props) => {
     navigation.setOptions({
       headerLeft: () => (
         <CustomHeaderButton
-          iconName='navicon'
+          iconName='md-menu'
           onPress={() => {
             navigation.openDrawer()
           }}

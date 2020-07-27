@@ -143,7 +143,7 @@ const EditProductScreen = ({ navigation, route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <CustomHeaderButton iconName='save' onPress={submitHandler} />
+        <CustomHeaderButton iconName='md-save' onPress={submitHandler} />
       ),
     })
   }, [submitHandler, navigation])

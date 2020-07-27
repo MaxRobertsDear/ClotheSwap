@@ -48,7 +48,7 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
     navigation.setOptions({
       headerRight: () => (
         <CustomHeaderButton
-          iconName='shopping-cart'
+          iconName='md-cart'
           onPress={() => {
             navigation.navigate('CartScreen')
           }}
@@ -61,7 +61,7 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
     navigation.setOptions({
       headerLeft: () => (
         <CustomHeaderButton
-          iconName='navicon'
+          iconName='md-menu'
           onPress={() => {
             navigation.openDrawer()
           }}
