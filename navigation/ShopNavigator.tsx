@@ -1,9 +1,10 @@
 import React from 'react'
-import { Platform, Button, View, SafeAreaView } from 'react-native'
+import { Platform, Button, View, SafeAreaView, Text } from 'react-native'
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch } from 'react-redux'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen'
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen'
@@ -140,7 +141,24 @@ const Orders = () => {
 const ShopTab = createBottomTabNavigator<ShopTabParamList>()
 const ShopTabNavigator = () => {
   return (
-    <ShopTab.Navigator>
+    <ShopTab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName
+
+          if (route.name === 'Home') {
+            iconName = 'md-search'
+          } else if (route.name === 'Profile') {
+            iconName = 'md-person'
+          }
+          return <Icon name={iconName} size={size} color={color} />
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: Colors.primary,
+        inactiveTintColor: 'gray',
+      }}
+    >
       <ShopTab.Screen name='Home' component={Home} />
       <ShopTab.Screen name='Profile' component={Profile} />
     </ShopTab.Navigator>
@@ -173,8 +191,54 @@ const ShopNavigator = () => {
         )
       }}
     >
-      <ShopDrawer.Screen name='Shop' component={ShopTabNavigator} />
-      <ShopDrawer.Screen name='Orders' component={Orders} />
+      <ShopDrawer.Screen
+        name='Shop'
+        component={ShopTabNavigator}
+        options={{
+          drawerIcon: ({ focused, size }) => {
+            let color
+            if (focused) {
+              color = Colors.primary
+            } else {
+              color = 'grey'
+            }
+            return <Icon name={'md-home'} size={size} color={color} />
+          },
+          drawerLabel: ({ focused }) => {
+            let color
+            if (focused) {
+              color = Colors.primary
+            } else {
+              color = 'grey'
+            }
+            return <Text style={{ color: color }}>Home</Text>
+          },
+        }}
+      />
+      <ShopDrawer.Screen
+        name='Orders'
+        component={Orders}
+        options={{
+          drawerIcon: ({ focused, size }) => {
+            let color
+            if (focused) {
+              color = Colors.primary
+            } else {
+              color = 'grey'
+            }
+            return <Icon name={'md-cart'} size={size} color={color} />
+          },
+          drawerLabel: ({ focused }) => {
+            let color
+            if (focused) {
+              color = Colors.primary
+            } else {
+              color = 'grey'
+            }
+            return <Text style={{ color: color }}>Orders</Text>
+          },
+        }}
+      />
     </ShopDrawer.Navigator>
   )
 }
