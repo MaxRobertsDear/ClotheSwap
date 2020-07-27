@@ -68,7 +68,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   imageContainer: {
-    width: Dimensions.get('window').width / 3 - 20,
+    width:
+      Platform.OS === 'web'
+        ? Dimensions.get('window').width / 3 - 20
+        : Dimensions.get('window').width / 3 - 5,
     height: Dimensions.get('window').width / 3 - 5,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
