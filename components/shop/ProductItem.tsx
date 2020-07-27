@@ -27,7 +27,7 @@ interface iTouchable {
 }
 
 const TouchableFeedback = ({ children, onPress }: iTouchable) => {
-  if (Platform.OS === 'ios') {
+  if (Platform.OS === 'ios' || Platform.OS === 'web') {
     return <TouchableOpacity onPress={onPress}>{children}</TouchableOpacity>
   } else if (Platform.OS === 'android') {
     return (
