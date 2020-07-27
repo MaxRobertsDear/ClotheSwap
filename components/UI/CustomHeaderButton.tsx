@@ -14,8 +14,8 @@ const CustomHeaderButton = ({ iconName, ...props }: iCustomeHeaderButton) => {
     <Icon.Button
       {...props}
       name={iconName}
-      backgroundColor={Platform.OS === 'android' ? Colors.primary : 'white'}
-      color={Platform.OS === 'android' ? 'white' : Colors.primary}
+      backgroundColor='white'
+      color={Colors.primary}
       size={23}
     ></Icon.Button>
   )

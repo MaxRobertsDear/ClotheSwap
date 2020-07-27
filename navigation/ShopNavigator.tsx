@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Button, View, SafeAreaView, Text } from 'react-native'
+import { Button, View, SafeAreaView, Text } from 'react-native'
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -34,12 +34,10 @@ const Home = () => {
           title: 'Products Overview',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
       <HomeStack.Screen
@@ -49,12 +47,10 @@ const Home = () => {
           title: 'Product Details',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            alignSelf: 'center',
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
       <HomeStack.Screen
@@ -64,12 +60,10 @@ const Home = () => {
           title: 'Cart',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
     </HomeStack.Navigator>
@@ -88,12 +82,10 @@ const Profile = () => {
           title: 'Your Products',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
       <ProfileStack.Screen
@@ -103,12 +95,10 @@ const Profile = () => {
           title: 'Edit Your Products',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
     </ProfileStack.Navigator>
@@ -127,12 +117,10 @@ const Orders = () => {
           title: 'Orders',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? Colors.primary : 'white',
+              'white',
           },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : Colors.primary,
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary
         }}
       />
     </OrdersStack.Navigator>
