@@ -104,6 +104,8 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
     <FlatList
       contentContainerStyle={{
         alignItems: 'center',
+        backgroundColor: 'white',
+        height: '100%',
       }}
       initialNumToRender={6}
       onRefresh={loadProducts}

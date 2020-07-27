@@ -54,6 +54,8 @@ const UserProductsScreen = ({ navigation }: Props) => {
       keyExtractor={(item) => item.id}
       contentContainerStyle={{
         alignItems: 'center',
+        backgroundColor: 'white',
+        height: '100%',
       }}
       initialNumToRender={6}
       numColumns={3}

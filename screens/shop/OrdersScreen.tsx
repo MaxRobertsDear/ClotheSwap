@@ -60,6 +60,10 @@ const OrdersScreen = ({ navigation }: Props) => {
   return (
     <FlatList
       data={orders}
+      contentContainerStyle={{
+        backgroundColor: 'white',
+        height: '100%',
+      }}
       keyExtractor={(item) => item.id}
       renderItem={(itemData) => (
         <OrderItem
