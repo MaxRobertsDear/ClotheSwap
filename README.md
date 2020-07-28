@@ -7,8 +7,13 @@ A fun and convenient way to update your wardrobe ...
 - reduce the amount of clothes destined for landfill
 
 <p align='center'>
-<a target="_blank"><img src="README-assets/demo1.gif" 
+<a target="_blank"><img src="README-assets/demo2.gif" 
 alt="Demo" width="207" height="448" alig /></a>
+</p>
+
+<p align='center'>
+<img src="README-assets/NavFlow.png" 
+alt="Demo" width="600" height="448" alig />
 </p>
 
 
