@@ -24,7 +24,7 @@ import {
 
 const HomeStack = createStackNavigator<HomeStackParamList>()
 
-const Home = () => {
+export const Home = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -33,11 +33,10 @@ const Home = () => {
         options={{
           title: 'Products Overview',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
       <HomeStack.Screen
@@ -46,11 +45,10 @@ const Home = () => {
         options={{
           title: 'Product Details',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
       <HomeStack.Screen
@@ -59,11 +57,10 @@ const Home = () => {
         options={{
           title: 'Cart',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
     </HomeStack.Navigator>
@@ -81,11 +78,10 @@ const Profile = () => {
         options={{
           title: 'Your Products',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
       <ProfileStack.Screen
@@ -94,11 +90,10 @@ const Profile = () => {
         options={{
           title: 'Edit Your Products',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
     </ProfileStack.Navigator>
@@ -116,11 +111,10 @@ const Orders = () => {
         options={{
           title: 'Orders',
           headerStyle: {
-            backgroundColor:
-              'white',
+            backgroundColor: 'white',
           },
           headerTitleAlign: 'center',
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.primary,
         }}
       />
     </OrdersStack.Navigator>
