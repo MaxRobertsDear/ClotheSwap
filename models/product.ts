@@ -1,3 +1,12 @@
+interface iProps {
+  id: string;
+  ownerId: string;
+  title: string;
+  imageUrl: string;
+  description: string;
+  price: number;
+}
+
 class Product {
   id: string
   ownerId: string
@@ -5,14 +14,7 @@ class Product {
   title: string
   description: string
   price: number
-  constructor(
-    id: string,
-    ownerId: string,
-    title: string,
-    imageUrl: string,
-    description: string,
-    price: number,
-  ) {
+  constructor({ id, ownerId, title, imageUrl, description, price }: iProps) {
     this.id = id
     this.ownerId = ownerId
     this.imageUrl = imageUrl

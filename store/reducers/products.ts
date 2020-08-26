@@ -20,14 +20,14 @@ export default (state = initialState, action: ProductActionTypes) => {
         userProducts: action.userProducts,
       }
     case CREATE_PRODUCT:
-      const newProduct = new Product(
-        action.productData.id,
-        action.productData.ownerId,
-        action.productData.title,
-        action.productData.imageUrl,
-        action.productData.description,
-        action.productData.price,
-      )
+      const newProduct = new Product({
+        id: action.productData.id,
+        ownerId: action.productData.ownerId,
+        title: action.productData.title,
+        imageUrl: action.productData.imageUrl,
+        description: action.productData.description,
+        price: action.productData.price,
+      })
       return {
         ...state,
         availableProducts: state.availableProducts.concat(newProduct),
@@ -37,14 +37,14 @@ export default (state = initialState, action: ProductActionTypes) => {
       const productIndex = state.userProducts.findIndex(
         (prod: { id: string }) => prod.id === action.pid,
       )
-      const updatedProduct = new Product(
-        action.pid,
-        state.userProducts[productIndex].ownerId,
-        action.productData.title,
-        action.productData.imageUrl,
-        action.productData.description,
-        state.userProducts[productIndex].price,
-      )
+      const updatedProduct = new Product({
+        id: action.pid,
+        ownerId: state.userProducts[productIndex].ownerId,
+        title: action.productData.title,
+        imageUrl: action.productData.imageUrl,
+        description: action.productData.description,
+        price: state.userProducts[productIndex].price,
+      })
       const updatedUserProducts = [...state.userProducts]
       updatedUserProducts[productIndex] = updatedProduct
       const availableProductIndex = state.availableProducts.findIndex(

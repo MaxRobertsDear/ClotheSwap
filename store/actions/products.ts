@@ -26,14 +26,14 @@ export const fetchProducts = (): AppThunk => {
           .ref(`images/${key}_700x700`)
           .getDownloadURL()
         loadedProducts.push(
-          new Product(
-            key,
-            resData[key].ownerId,
-            resData[key].title,
-            imageUrl,
-            resData[key].description,
-            resData[key].price,
-          ),
+          new Product({
+            id: key,
+            ownerId: resData[key].ownerId,
+            title: resData[key].title,
+            imageUrl: imageUrl,
+            description: resData[key].description,
+            price: resData[key].price,
+          }),
         )
       }
 
