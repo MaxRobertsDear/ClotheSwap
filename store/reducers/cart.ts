@@ -18,19 +18,24 @@ export default (state = initialSate, action: CartActionTypes) => {
 
       if (state.items[addedProduct.id]) {
         // already have that product in the items
-        const updatedCartItem = new CartItem(
-          state.items[addedProduct.id].quantity + 1,
-          prodPrice,
-          prodTitle,
-          state.items[addedProduct.id].sum + prodPrice,
-        )
+        const updatedCartItem = new CartItem({
+          quantity: state.items[addedProduct.id].quantity + 1,
+          productPrice: prodPrice,
+          productTitle: prodTitle,
+          sum: state.items[addedProduct.id].sum + prodPrice,
+        })
         return {
           ...state,
           items: { ...state.items, [addedProduct.id]: updatedCartItem },
           totalAmount: state.totalAmount + prodPrice,
         }
       } else {
-        const newCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice)
+        const newCartItem = new CartItem({
+          quantity: 1,
+          productPrice: prodPrice,
+          productTitle: prodTitle,
+          sum: prodPrice,
+        })
         return {
           ...state,
           items: { ...state.items, [addedProduct.id]: newCartItem },
@@ -43,12 +48,12 @@ export default (state = initialSate, action: CartActionTypes) => {
       let updatedCartItems
 
       if (currentQty > 1) {
-        const updatedCartItem = new CartItem(
-          selectedCartItem.quantity - 1,
-          selectedCartItem.productPrice,
-          selectedCartItem.productTitle,
-          selectedCartItem.sum - selectedCartItem.productPrice,
-        )
+        const updatedCartItem = new CartItem({
+          quantity: selectedCartItem.quantity - 1,
+          productPrice: selectedCartItem.productPrice,
+          productTitle: selectedCartItem.productTitle,
+          sum: selectedCartItem.sum - selectedCartItem.productPrice,
+        })
         updatedCartItems = { ...state.items, [action.pid]: updatedCartItem }
       } else {
         updatedCartItems = { ...state.items }
