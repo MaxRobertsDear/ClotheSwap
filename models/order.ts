@@ -1,11 +1,18 @@
 import Cartitem from './cart-item'
 
+interface iProps {
+  id: string;
+  items: Cartitem[];
+  totalAmount: number;
+  date: Date;
+}
+
 class Order {
   id: string
   items: Cartitem[]
   totalAmount: number
   date: Date
-  constructor(id: string, items: Cartitem[], totalAmount: number, date: Date) {
+  constructor({ id, items, totalAmount, date }: iProps) {
     this.id = id
     this.items = items
     this.totalAmount = totalAmount
