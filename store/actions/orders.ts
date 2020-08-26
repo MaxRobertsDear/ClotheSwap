@@ -20,12 +20,12 @@ export const fetchOrders = (): AppThunk => {
       const loadedOrders = []
       for (const key in resData) {
         loadedOrders.push(
-          new Order(
-            key,
-            resData[key].cartItems,
-            resData[key].totalAmount,
-            new Date(resData[key].date),
-          ),
+          new Order({
+            id: key,
+            items: resData[key].cartItems,
+            totalAmount: resData[key].totalAmount,
+            date: new Date(resData[key].date),
+          }),
         )
       }
       dispatch({ type: SET_ORDERS, orders: loadedOrders })
