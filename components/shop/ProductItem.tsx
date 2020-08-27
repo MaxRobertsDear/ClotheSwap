@@ -9,7 +9,10 @@ import {
 } from 'react-native'
 
 import Card from '../UI/Card'
-import { numberOfItemColumns } from '../../constants/Constants'
+import {
+  numberOfItemColumns,
+  productItemMargin,
+} from '../../constants/Constants'
 import {
   TouchableOpacity,
   TouchableNativeFeedback,
@@ -42,19 +45,17 @@ const TouchableFeedback = ({ children, onPress }: iTouchable) => {
 const ProductItem = ({ image, title, price, onClick }: iProductItem) => {
   return (
     <Card style={styles.product}>
-      <View style={styles.touchable}>
-        <TouchableFeedback onPress={onClick}>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: image }} />
-          </View>
-          <View style={styles.details}>
-            <Text style={styles.title} numberOfLines={1}>
-              {title}
-            </Text>
-            <Text style={styles.price}>£{price.toFixed(2)}</Text>
-          </View>
-        </TouchableFeedback>
-      </View>
+      <TouchableFeedback onPress={onClick}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{ uri: image }} />
+        </View>
+        <View style={styles.details}>
+          <Text style={styles.title} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={styles.price}>£{price.toFixed(2)}</Text>
+        </View>
+      </TouchableFeedback>
     </Card>
   )
 }
@@ -62,21 +63,22 @@ const ProductItem = ({ image, title, price, onClick }: iProductItem) => {
 const styles = StyleSheet.create({
   product: {
     display: 'flex',
-    width: Dimensions.get('window').width / numberOfItemColumns - 30,
-    margin: 15,
-  },
-  touchable: {
-    overflow: 'hidden',
-    borderRadius: 10,
+    width:
+      Dimensions.get('window').width / numberOfItemColumns -
+      (numberOfItemColumns + 1) * productItemMargin,
+    margin: productItemMargin,
   },
   imageContainer: {
     width:
       Platform.OS === 'web'
-        ? Dimensions.get('window').width / numberOfItemColumns - 20
-        : Dimensions.get('window').width / numberOfItemColumns - 5,
-    height: Dimensions.get('window').width / numberOfItemColumns - 5,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+        ? Dimensions.get('window').width / numberOfItemColumns -
+          (numberOfItemColumns + 1) * productItemMargin
+        : Dimensions.get('window').width / numberOfItemColumns -
+          (numberOfItemColumns + 1) * productItemMargin,
+    height:
+      Dimensions.get('window').width / numberOfItemColumns -
+      (numberOfItemColumns + 1) * productItemMargin,
+    borderRadius: 20,
     overflow: 'hidden',
   },
   image: {
@@ -88,7 +90,9 @@ const styles = StyleSheet.create({
   },
   details: {
     display: 'flex',
-    width: Dimensions.get('window').width / numberOfItemColumns - 5,
+    width:
+      Dimensions.get('window').width / numberOfItemColumns -
+      (numberOfItemColumns + 1) * productItemMargin,
     alignItems: 'center',
     padding: 10,
   },
