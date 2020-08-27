@@ -14,6 +14,7 @@ import Colors from '../../constants/Colors'
 import * as productsActions from '../../store/actions/products'
 import { RootState } from '../ProductsRootState.d'
 import { Props } from './ProductsOverviewScreen.d'
+import { numberOfItemColumns } from '../../constants/Constants'
 
 const ProductsOverviewScreen = ({ navigation }: Props) => {
   const products = useSelector(
@@ -105,13 +106,12 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       contentContainerStyle={{
         alignItems: 'center',
         backgroundColor: 'white',
-        height: '100%',
       }}
       initialNumToRender={6}
       onRefresh={loadProducts}
       refreshing={isRefreshing}
       data={products}
-      numColumns={3}
+      numColumns={numberOfItemColumns}
       showsVerticalScrollIndicator={false}
       renderItem={(itemData) => (
         <ProductItem

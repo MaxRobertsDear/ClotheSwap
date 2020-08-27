@@ -139,6 +139,20 @@ const ShopTabNavigator = () => {
       tabBarOptions={{
         activeTintColor: Colors.primary,
         inactiveTintColor: 'gray',
+        style: {
+          marginBottom: 40,
+          marginHorizontal: 100,
+          paddingBottom: 20,
+          borderRadius: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+          shadowColor: 'black',
+          shadowOpacity: 0.27,
+          shadowOffset: { width: 0, height: 2 },
+          shadowRadius: 8,
+          elevation: 5,
+          position: 'absolute',
+        },
       }}
     >
       <ShopTab.Screen name='Home' component={Home} />

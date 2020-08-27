@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react'
 import { FlatList, View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 
+import { numberOfItemColumns } from '../../constants/Constants'
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import ProductItem from '../../components/shop/ProductItem'
 import { RootState } from '../ProductsRootState.d'
@@ -55,10 +56,9 @@ const UserProductsScreen = ({ navigation }: Props) => {
       contentContainerStyle={{
         alignItems: 'center',
         backgroundColor: 'white',
-        height: '100%',
       }}
       initialNumToRender={6}
-      numColumns={3}
+      numColumns={numberOfItemColumns}
       renderItem={(itemData) => (
         <ProductItem
           title={itemData.item.title}

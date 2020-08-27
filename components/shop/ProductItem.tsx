@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import Card from '../UI/Card'
+import { numberOfItemColumns } from '../../constants/Constants'
 import {
   TouchableOpacity,
   TouchableNativeFeedback,
@@ -61,7 +62,8 @@ const ProductItem = ({ image, title, price, onClick }: iProductItem) => {
 const styles = StyleSheet.create({
   product: {
     display: 'flex',
-    margin: 2,
+    width: Dimensions.get('window').width / numberOfItemColumns - 30,
+    margin: 15,
   },
   touchable: {
     overflow: 'hidden',
@@ -70,9 +72,9 @@ const styles = StyleSheet.create({
   imageContainer: {
     width:
       Platform.OS === 'web'
-        ? Dimensions.get('window').width / 3 - 20
-        : Dimensions.get('window').width / 3 - 5,
-    height: Dimensions.get('window').width / 3 - 5,
+        ? Dimensions.get('window').width / numberOfItemColumns - 20
+        : Dimensions.get('window').width / numberOfItemColumns - 5,
+    height: Dimensions.get('window').width / numberOfItemColumns - 5,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     overflow: 'hidden',
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   },
   details: {
     display: 'flex',
-    width: Dimensions.get('screen').width / 3 - 5,
+    width: Dimensions.get('window').width / numberOfItemColumns - 5,
     alignItems: 'center',
     padding: 10,
   },
