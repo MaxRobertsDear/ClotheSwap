@@ -194,6 +194,10 @@ const styles = StyleSheet.create({
     width: '80%',
     maxWidth: 400,
     maxHeight: 400,
+    shadowColor: 'black',
+    shadowOpacity: 0.27,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
   },
   buttonContainer: {
     marginTop: 10,
