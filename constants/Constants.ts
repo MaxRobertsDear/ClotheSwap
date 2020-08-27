@@ -1,1 +1,1 @@
-export const numberOfItemColumns = 1
+export const numberOfItemColumns = 2

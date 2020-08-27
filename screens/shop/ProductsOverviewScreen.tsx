@@ -106,7 +106,6 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       contentContainerStyle={{
         alignItems: 'center',
         backgroundColor: 'white',
-        height: '100%',
       }}
       initialNumToRender={6}
       onRefresh={loadProducts}

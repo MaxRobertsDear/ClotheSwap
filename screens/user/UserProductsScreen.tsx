@@ -56,7 +56,6 @@ const UserProductsScreen = ({ navigation }: Props) => {
       contentContainerStyle={{
         alignItems: 'center',
         backgroundColor: 'white',
-        height: '100%',
       }}
       initialNumToRender={6}
       numColumns={numberOfItemColumns}
