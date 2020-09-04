@@ -18,28 +18,18 @@ import * as authActions from '../../store/actions/auth'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-interface iInputValues {
-  email: string;
-  password: string;
-}
-
 interface iInputValidities {
   [key: string]: boolean;
 }
 
 const formReducer = (
   state: {
-    inputValues: iInputValues,
     inputValidities: iInputValidities,
     formIsValid: boolean,
   },
-  action: { type: string, input: string, value: string, isValid: boolean },
+  action: { type: string, input: string, isValid: boolean },
 ) => {
   if (action.type === FORM_INPUT_UPDATE) {
-    const updatedValues = {
-      ...state.inputValues,
-      [action.input]: action.value,
-    }
     const updatedValidities = {
       ...state.inputValidities,
       [action.input]: action.isValid,
@@ -51,7 +41,6 @@ const formReducer = (
     return {
       formIsValid: updatedFormIsValid,
       inputValidities: updatedValidities,
-      inputValues: updatedValues,
     }
   }
   return state
@@ -62,12 +51,10 @@ const AuthScreen = () => {
   const [isSignup, setIsSignup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
-    inputValues: {
-      email: '',
-      password: '',
-    },
     inputValidities: {
       email: true,
       password: true,
@@ -86,13 +73,13 @@ const AuthScreen = () => {
       let action
       if (isSignup) {
         action = authActions.signup({
-          email: formState.inputValues.email,
-          password: formState.inputValues.password,
+          email: email,
+          password: password,
         })
       } else if (!isSignup) {
         action = authActions.login({
-          email: formState.inputValues.email,
-          password: formState.inputValues.password,
+          email: email,
+          password: password,
         })
       }
       setIsLoading(true)
@@ -106,8 +93,19 @@ const AuthScreen = () => {
     return
   }
 
-  const textChangeHandler = useCallback(
-    (inputIdentifier, text) => {
+  const textInputHandler = (inputIdentifier: string, text: string) => {
+    switch (inputIdentifier) {
+      case 'email':
+        setEmail(text)
+        break
+      case 'password':
+        setPassword(text)
+        break
+    }
+  }
+
+  const formFieldValidator = useCallback(
+    (inputIdentifier: string, text: string) => {
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       let isValid = false
       if (inputIdentifier === 'password' && text.trim().length > 5) {
@@ -118,7 +116,6 @@ const AuthScreen = () => {
       }
       dispatchFormState({
         type: FORM_INPUT_UPDATE,
-        value: text,
         isValid: isValid,
         input: inputIdentifier,
       })
@@ -140,8 +137,9 @@ const AuthScreen = () => {
             autoCapitalize='none'
             returnKeyType='next'
             errorText={formState.inputValidities.email}
-            value={formState.inputValues.email}
-            onChangeText={(input: string) => textChangeHandler('email', input)}
+            value={email}
+            onChangeText={(input: string) => textInputHandler('email', input)}
+            onBlur={() => formFieldValidator('email', email)}
           />
           <Input
             label='Password'
@@ -151,10 +149,11 @@ const AuthScreen = () => {
             secureTextEntry
             minLength={5}
             errorText={formState.inputValidities.password}
-            value={formState.inputValues.password}
+            value={password}
             onChangeText={(input: string) =>
-              textChangeHandler('password', input)
+              textInputHandler('password', input)
             }
+            onBlur={() => formFieldValidator('password', password)}
           />
           <View style={styles.buttonContainer}>
             {isLoading ? (

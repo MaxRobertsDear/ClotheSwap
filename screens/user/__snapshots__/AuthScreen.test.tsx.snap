@@ -75,6 +75,7 @@ exports[`renders correctly 1`] = `
           allowFontScaling={true}
           autoCapitalize="none"
           keyboardType="email-address"
+          onBlur={[Function]}
           onChangeText={[Function]}
           placeholder="example@example.com"
           rejectResponderTermination={true}
@@ -113,6 +114,7 @@ exports[`renders correctly 1`] = `
           autoCapitalize="none"
           keyboardType="default"
           minLength={5}
+          onBlur={[Function]}
           onChangeText={[Function]}
           placeholder="minimum 6 characters"
           rejectResponderTermination={true}
@@ -171,7 +173,7 @@ exports[`renders correctly 1`] = `
                     "textAlign": "center",
                   },
                   Object {
-                    "color": "#C2185B",
+                    "color": "black",
                   },
                 ]
               }
