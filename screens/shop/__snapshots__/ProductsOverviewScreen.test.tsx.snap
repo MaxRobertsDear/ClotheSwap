@@ -171,7 +171,7 @@ exports[`products overview screen renders correctly 1`] = `
                 onLayout={[Function]}
                 style={
                   Object {
-                    "color": "#C2185B",
+                    "color": "black",
                     "fontSize": 17,
                     "fontWeight": "600",
                   }

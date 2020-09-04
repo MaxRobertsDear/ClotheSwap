@@ -43,6 +43,7 @@ interface iInput {
   autoCorrect?: boolean;
   multiline?: boolean;
   maxLength?: number;
+  onBlur?: () => void;
 }
 
 const Input = ({ label, errorText, ...props }: iInput) => {

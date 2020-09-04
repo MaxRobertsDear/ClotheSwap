@@ -18,28 +18,18 @@ import * as authActions from '../../store/actions/auth'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-// interface iInputValues {
-//   email: string;
-//   password: string;
-// }
-
 interface iInputValidities {
   [key: string]: boolean;
 }
 
 const formReducer = (
   state: {
-    // inputValues: iInputValues,
     inputValidities: iInputValidities,
     formIsValid: boolean,
   },
   action: { type: string, input: string, isValid: boolean },
 ) => {
   if (action.type === FORM_INPUT_UPDATE) {
-    // const updatedValues = {
-    //   ...state.inputValues,
-    //   [action.input]: action.value,
-    // }
     const updatedValidities = {
       ...state.inputValidities,
       [action.input]: action.isValid,
@@ -51,7 +41,6 @@ const formReducer = (
     return {
       formIsValid: updatedFormIsValid,
       inputValidities: updatedValidities,
-      // inputValues: updatedValues,
     }
   }
   return state
@@ -66,10 +55,6 @@ const AuthScreen = () => {
   const [password, setPassword] = useState('')
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
-    // inputValues: {
-    //   email: '',
-    //   password: '',
-    // },
     inputValidities: {
       email: true,
       password: true,
@@ -108,8 +93,19 @@ const AuthScreen = () => {
     return
   }
 
+  const textInputHandler = (inputIdentifier: string, text: string) => {
+    switch (inputIdentifier) {
+      case 'email':
+        setEmail(text)
+        break
+      case 'password':
+        setPassword(text)
+        break
+    }
+  }
+
   const formFieldValidator = useCallback(
-    (inputIdentifier, text) => {
+    (inputIdentifier: string, text: string) => {
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       let isValid = false
       if (inputIdentifier === 'password' && text.trim().length > 5) {
@@ -120,7 +116,6 @@ const AuthScreen = () => {
       }
       dispatchFormState({
         type: FORM_INPUT_UPDATE,
-        // value: text,
         isValid: isValid,
         input: inputIdentifier,
       })
@@ -143,7 +138,7 @@ const AuthScreen = () => {
             returnKeyType='next'
             errorText={formState.inputValidities.email}
             value={email}
-            onChangeText={(input: string) => setEmail(input)}
+            onChangeText={(input: string) => textInputHandler('email', input)}
             onBlur={() => formFieldValidator('email', email)}
           />
           <Input
@@ -155,7 +150,9 @@ const AuthScreen = () => {
             minLength={5}
             errorText={formState.inputValidities.password}
             value={password}
-            onChangeText={(input: string) => setPassword(input)}
+            onChangeText={(input: string) =>
+              textInputHandler('password', input)
+            }
             onBlur={() => formFieldValidator('password', password)}
           />
           <View style={styles.buttonContainer}>
