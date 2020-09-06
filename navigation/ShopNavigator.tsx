@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch } from 'react-redux'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen'
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen'
@@ -22,7 +23,8 @@ import {
   ShopDrawerParamList,
 } from './paramList'
 
-const HomeStack = createStackNavigator<HomeStackParamList>()
+// const HomeStack = createStackNavigator<HomeStackParamList>()
+const HomeStack = createSharedElementStackNavigator<HomeStackParamList>()
 
 export const Home = () => {
   return (
@@ -49,6 +51,17 @@ export const Home = () => {
           },
           headerTitleAlign: 'center',
           headerTintColor: Colors.primary,
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            }
+          }
+        }}
+        sharedElementsConfig={(route) => {
+          const { productId } = route.params;
+          return [`item.${productId}.photo`];
         }}
       />
       <HomeStack.Screen

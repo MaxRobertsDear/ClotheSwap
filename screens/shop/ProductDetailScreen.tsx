@@ -10,6 +10,7 @@ import {
   Platform,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { SharedElement } from 'react-navigation-shared-element'
 
 import Colors from '../../constants/Colors'
 import * as cartActions from '../../store/actions/cart'
@@ -31,12 +32,14 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <ScrollView>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={{ uri: selectedProduct && selectedProduct.imageUrl }}
-        />
-      </View>
+      <SharedElement id={`item.${productId}.photo`}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{ uri: selectedProduct && selectedProduct.imageUrl }}
+          />
+        </View>
+      </SharedElement>
       <View style={styles.action}>
         <Button
           color={Colors.primary}
