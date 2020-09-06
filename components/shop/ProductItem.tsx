@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'
 
-
 import Card from '../UI/Card'
 import {
   numberOfItemColumns,
@@ -24,6 +23,7 @@ interface iProductItem {
   image: string;
   title: string;
   price: number;
+  productId: string;
   onClick: () => void;
 }
 
@@ -44,7 +44,13 @@ const TouchableFeedback = ({ children, onPress }: iTouchable) => {
   }
 }
 
-const ProductItem = ({ image, title, price, productId, onClick }: iProductItem) => {
+const ProductItem = ({
+  image,
+  title,
+  price,
+  productId,
+  onClick,
+}: iProductItem) => {
   return (
     <Card style={styles.product}>
       <TouchableFeedback onPress={onClick}>
@@ -76,9 +82,9 @@ const styles = StyleSheet.create({
     width:
       Platform.OS === 'web'
         ? Dimensions.get('window').width / numberOfItemColumns -
-        (numberOfItemColumns + 1) * productItemMargin
+          (numberOfItemColumns + 1) * productItemMargin
         : Dimensions.get('window').width / numberOfItemColumns -
-        (numberOfItemColumns + 1) * productItemMargin,
+          (numberOfItemColumns + 1) * productItemMargin,
     height:
       Dimensions.get('window').width / numberOfItemColumns -
       (numberOfItemColumns + 1) * productItemMargin,
