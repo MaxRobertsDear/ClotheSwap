@@ -7,6 +7,7 @@ import {
   Dimensions,
   Text,
 } from 'react-native'
+import { SharedElement } from 'react-navigation-shared-element'
 
 import Card from '../UI/Card'
 import {
@@ -22,6 +23,7 @@ interface iProductItem {
   image: string;
   title: string;
   price: number;
+  productId: string;
   onClick: () => void;
 }
 
@@ -42,13 +44,21 @@ const TouchableFeedback = ({ children, onPress }: iTouchable) => {
   }
 }
 
-const ProductItem = ({ image, title, price, onClick }: iProductItem) => {
+const ProductItem = ({
+  image,
+  title,
+  price,
+  productId,
+  onClick,
+}: iProductItem) => {
   return (
     <Card style={styles.product}>
       <TouchableFeedback onPress={onClick}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: image }} />
-        </View>
+        <SharedElement id={`item.${productId}.photo`}>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={{ uri: image }} />
+          </View>
+        </SharedElement>
         <View style={styles.details}>
           <Text style={styles.title} numberOfLines={1}>
             {title}

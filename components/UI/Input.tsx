@@ -6,38 +6,38 @@ interface iInput {
   errorText: boolean;
   placeholder?: string;
   keyboardType?:
-    | 'default'
-    | 'email-address'
-    | 'numeric'
-    | 'phone-pad'
-    | 'number-pad'
-    | 'decimal-pad'
-    | 'visible-password'
-    | 'ascii-capable'
-    | 'numbers-and-punctuation'
-    | 'url'
-    | 'name-phone-pad'
-    | 'twitter'
-    | 'web-search'
-    | undefined;
+  | 'default'
+  | 'email-address'
+  | 'numeric'
+  | 'phone-pad'
+  | 'number-pad'
+  | 'decimal-pad'
+  | 'visible-password'
+  | 'ascii-capable'
+  | 'numbers-and-punctuation'
+  | 'url'
+  | 'name-phone-pad'
+  | 'twitter'
+  | 'web-search'
+  | undefined;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
   secureTextEntry?: boolean;
   minLength?: number;
   returnKeyType?:
-    | 'default'
-    | 'none'
-    | 'done'
-    | 'go'
-    | 'next'
-    | 'search'
-    | 'send'
-    | 'previous'
-    | 'google'
-    | 'join'
-    | 'route'
-    | 'yahoo'
-    | 'emergency-call'
-    | undefined;
+  | 'default'
+  | 'none'
+  | 'done'
+  | 'go'
+  | 'next'
+  | 'search'
+  | 'send'
+  | 'previous'
+  | 'google'
+  | 'join'
+  | 'route'
+  | 'yahoo'
+  | 'emergency-call'
+  | undefined;
   value?: string;
   onChangeText?: (input: string) => void;
   autoCorrect?: boolean;
