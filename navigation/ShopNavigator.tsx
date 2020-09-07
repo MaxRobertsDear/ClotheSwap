@@ -144,7 +144,7 @@ const ShopTabNavigator = () => {
 
           if (route.name === 'Home') {
             iconName = 'md-search'
-          } else if (route.name === 'Likes') {
+          } else if (route.name === 'Favourites') {
             iconName = 'md-heart'
           } else if (route.name === 'Profile') {
             iconName = 'md-person'

@@ -44,10 +44,11 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
     })
   }, [dispatch, loadFavourites])
 
-  const selectItemHandler = (id: string, title: string) => {
+  const selectItemHandler = (id: string, title: string, ownerId: string) => {
     navigation.navigate('ProductDetails', {
       productId: id,
       productTitle: title,
+      ownerId: ownerId
     })
   }
 
@@ -93,7 +94,7 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
           image={itemData.item.imageUrl}
           productId={itemData.item.id}
           onClick={() => {
-            selectItemHandler(itemData.item.id, itemData.item.title)
+            selectItemHandler(itemData.item.id, itemData.item.title, itemData.item.ownerId)
           }}
         />
       )}
