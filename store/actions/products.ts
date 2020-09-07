@@ -12,7 +12,7 @@ export const fetchProducts = (): AppThunk => {
     try {
       const response = await fetch(
         `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-          getState().auth.token
+        getState().auth.token
         }`,
       )
       if (!response.ok) {
@@ -54,7 +54,7 @@ export const deleteProduct = (productId: string): AppThunk => {
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${productId}.json?auth=${
-        getState().auth.token
+      getState().auth.token
       }`,
       {
         method: 'DELETE',
@@ -75,7 +75,7 @@ export const createProduct = (
   return async (dispatch, getState) => {
     const response = await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products.json?auth=${
-        getState().auth.token
+      getState().auth.token
       }`,
       {
         method: 'POST',
@@ -129,7 +129,7 @@ export const updateProduct = (
   return async (dispatch, getState) => {
     await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/products/${id}.json?auth=${
-        getState().auth.token
+      getState().auth.token
       }`,
       {
         method: 'PATCH',

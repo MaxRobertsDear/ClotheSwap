@@ -22,6 +22,7 @@ import {
   ShopTabParamList,
   ShopDrawerParamList,
 } from './paramList'
+import FavouriteProductsScreen from '../screens/shop/FavouriteProductsScreen'
 
 // const HomeStack = createStackNavigator<HomeStackParamList>()
 const HomeStack = createSharedElementStackNavigator<HomeStackParamList>()
@@ -143,6 +144,8 @@ const ShopTabNavigator = () => {
 
           if (route.name === 'Home') {
             iconName = 'md-search'
+          } else if (route.name === 'Likes') {
+            iconName = 'md-heart'
           } else if (route.name === 'Profile') {
             iconName = 'md-person'
           }
@@ -169,6 +172,7 @@ const ShopTabNavigator = () => {
       }}
     >
       <ShopTab.Screen name='Home' component={Home} />
+      <ShopTab.Screen name='Favourites' component={FavouriteProductsScreen} />
       <ShopTab.Screen name='Profile' component={Profile} />
     </ShopTab.Navigator>
   )

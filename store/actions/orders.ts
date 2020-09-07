@@ -10,13 +10,14 @@ export const fetchOrders = (): AppThunk => {
     try {
       const response = await fetch(
         `https://rn-shop-app-f2dc2.firebaseio.com/orders/${
-          getState().auth.userId
+        getState().auth.userId
         }.json?auth=${getState().auth.token}`,
       )
       if (!response.ok) {
         throw new Error('Something went wrong!')
       }
       const resData = await response.json()
+      console.log('fetching orders ...', resData)
       const loadedOrders = []
       for (const key in resData) {
         loadedOrders.push(
@@ -43,7 +44,7 @@ export const addOrders = (
     const date = new Date()
     const response = await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/orders/${
-        getState().auth.userId
+      getState().auth.userId
       }.json?auth=${getState().auth.token}`,
       {
         method: 'POST',

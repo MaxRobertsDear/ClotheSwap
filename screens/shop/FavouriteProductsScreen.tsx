@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,14 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 
 import ProductItem from '../../components/shop/ProductItem'
-import CustomHeaderButton from '../../components/UI/CustomHeaderButton'
 import Colors from '../../constants/Colors'
-import * as productsActions from '../../store/actions/products'
-import { RootState } from '../ProductsRootState.d'
+import * as favouritesActions from '../../store/actions/favourites'
+import { RootState } from '../ProductsRootState'
 import { Props } from './ProductsOverviewScreen.d'
 import { numberOfItemColumns } from '../../constants/Constants'
 
-const ProductsOverviewScreen = ({ navigation }: Props) => {
-  const products = useSelector(
+const FavouriteProductsScreen = ({ navigation }: Props) => {
+  const favourites = useSelector(
     (state: RootState) => state.products.availableProducts,
   )
   const dispatch = useDispatch()
@@ -26,12 +25,12 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [error, setError]: any = useState()
 
-  const loadProducts = useCallback(async () => {
+  const loadFavourites = useCallback(async () => {
     setIsRefreshing(true)
 
     setError(null)
     try {
-      await dispatch(productsActions.fetchProducts())
+      await dispatch(favouritesActions.fetchFavourites())
     } catch (err) {
       setError(err.message)
     }
@@ -40,42 +39,15 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
 
   useEffect(() => {
     setIsLoading(true)
-    loadProducts().then(() => {
+    loadFavourites().then(() => {
       setIsLoading(false)
     })
-  }, [dispatch, loadProducts])
+  }, [dispatch, loadFavourites])
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <CustomHeaderButton
-          iconName='md-cart'
-          onPress={() => {
-            navigation.navigate('CartScreen')
-          }}
-        />
-      ),
-    })
-  }, [navigation])
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <CustomHeaderButton
-          iconName='md-menu'
-          onPress={() => {
-            navigation.openDrawer()
-          }}
-        />
-      ),
-    })
-  }, [navigation])
-
-  const selectItemHandler = (id: string, title: string, ownerId: string) => {
+  const selectItemHandler = (id: string, title: string) => {
     navigation.navigate('ProductDetails', {
       productId: id,
       productTitle: title,
-      ownerId: ownerId
     })
   }
 
@@ -94,7 +66,7 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
       </View>
     )
   }
-  if (!isLoading && products.length === 0) {
+  if (!isLoading && favourites.length === 0) {
     return (
       <View style={styles.centered}>
         <Text>Products not found. Maybe start adding some!</Text>
@@ -109,9 +81,9 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
         backgroundColor: 'white',
       }}
       initialNumToRender={6}
-      onRefresh={loadProducts}
+      onRefresh={loadFavourites}
       refreshing={isRefreshing}
-      data={products}
+      data={favourites}
       numColumns={numberOfItemColumns}
       showsVerticalScrollIndicator={false}
       renderItem={(itemData) => (
@@ -121,7 +93,7 @@ const ProductsOverviewScreen = ({ navigation }: Props) => {
           image={itemData.item.imageUrl}
           productId={itemData.item.id}
           onClick={() => {
-            selectItemHandler(itemData.item.id, itemData.item.title, itemData.item.ownerId)
+            selectItemHandler(itemData.item.id, itemData.item.title)
           }}
         />
       )}
@@ -142,4 +114,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ProductsOverviewScreen
+export default FavouriteProductsScreen

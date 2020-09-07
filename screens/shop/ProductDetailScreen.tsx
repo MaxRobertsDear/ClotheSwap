@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useCallback } from 'react'
 import {
   Text,
   StyleSheet,
@@ -12,6 +12,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { SharedElement } from 'react-navigation-shared-element'
 
+import * as favouriteActions from '../../store/actions/favourites'
 import Colors from '../../constants/Colors'
 import * as cartActions from '../../store/actions/cart'
 import { RootState } from '../ProductsRootState.d'
@@ -30,6 +31,21 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
     })
   }, [navigation, route.params.productTitle])
 
+
+  const submitHandler = useCallback(async (prodId, ownerId) => {
+    try {
+      await dispatch(
+        favouriteActions.favouriteProduct(
+          prodId,
+          ownerId
+        ),
+      )
+    } catch (err) {
+      console.log(err.message)
+    }
+    navigation.goBack()
+  }, [dispatch, navigation])
+
   return (
     <ScrollView>
       <SharedElement id={`item.${productId}.photo`}>
@@ -47,6 +63,18 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
           onPress={() => {
             if (selectedProduct) {
               dispatch(cartActions.addToCart(selectedProduct))
+            } else {
+              return
+            }
+          }}
+        />
+        <Button
+          color={Colors.primary}
+          title='❤️'
+          onPress={() => {
+            if (selectedProduct) {
+              console.log('liked!')
+              submitHandler(productId, selectedProduct.ownerId)
             } else {
               return
             }

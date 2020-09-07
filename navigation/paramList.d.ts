@@ -4,6 +4,7 @@ type HomeStackParamList = {
   ProductDetails: {
     productId: string,
     productTitle: string,
+    ownerId: string,
   },
   CartScreen: undefined,
 }
@@ -19,6 +20,7 @@ type OrdersStackParamList = {
 
 type ShopTabParamList = {
   Home: undefined,
+  Favourites: undefined,
   Profile: undefined,
 }
 
