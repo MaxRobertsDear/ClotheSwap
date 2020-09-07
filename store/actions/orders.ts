@@ -17,7 +17,6 @@ export const fetchOrders = (): AppThunk => {
         throw new Error('Something went wrong!')
       }
       const resData = await response.json()
-      console.log('fetching orders ...', resData)
       const loadedOrders = []
       for (const key in resData) {
         loadedOrders.push(

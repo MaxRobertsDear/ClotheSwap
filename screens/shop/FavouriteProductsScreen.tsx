@@ -11,13 +11,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import ProductItem from '../../components/shop/ProductItem'
 import Colors from '../../constants/Colors'
 import * as favouritesActions from '../../store/actions/favourites'
-import { RootState } from '../ProductsRootState'
+// import { RootState } from '../ProductsRootState'
 import { Props } from './ProductsOverviewScreen.d'
 import { numberOfItemColumns } from '../../constants/Constants'
 
 const FavouriteProductsScreen = ({ navigation }: Props) => {
   const favourites = useSelector(
-    (state: RootState) => state.products.availableProducts,
+    (state: any) => state.favourites.favourites,
   )
   const dispatch = useDispatch()
 
@@ -42,14 +42,22 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
     loadFavourites().then(() => {
       setIsLoading(false)
     })
-  }, [dispatch, loadFavourites])
+  }, [loadFavourites])
 
   const selectItemHandler = (id: string, title: string, ownerId: string) => {
-    navigation.navigate('ProductDetails', {
+    navigation.navigate('FavProductDetails', {
       productId: id,
       productTitle: title,
       ownerId: ownerId
     })
+  }
+
+  if (!favourites.length) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>No products found. Maybe you should create some</Text>
+      </View>
+    )
   }
 
   if (error) {

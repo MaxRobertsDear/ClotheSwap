@@ -134,6 +134,51 @@ const Orders = () => {
     </OrdersStack.Navigator>
   )
 }
+
+const FavouritesStack = createSharedElementStackNavigator()
+
+const Favourites = () => {
+  return (
+    <FavouritesStack.Navigator>
+      <FavouritesStack.Screen
+        name='FavouriteProducts'
+        component={FavouriteProductsScreen}
+        options={{
+          title: 'Fav Products Overview',
+          headerStyle: {
+            backgroundColor: 'white',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary,
+        }}
+      />
+      <FavouritesStack.Screen
+        name='FavProductDetails'
+        component={ProductDetailScreen}
+        options={{
+          title: 'Fav Product Details',
+          headerStyle: {
+            backgroundColor: 'white',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: Colors.primary,
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            }
+          }
+        }}
+        sharedElementsConfig={(route) => {
+          const { productId } = route.params;
+          return [`item.${productId}.photo`];
+        }}
+      />
+    </FavouritesStack.Navigator>
+  )
+}
+
 const ShopTab = createBottomTabNavigator<ShopTabParamList>()
 const ShopTabNavigator = () => {
   return (
@@ -172,7 +217,7 @@ const ShopTabNavigator = () => {
       }}
     >
       <ShopTab.Screen name='Home' component={Home} />
-      <ShopTab.Screen name='Favourites' component={FavouriteProductsScreen} />
+      <ShopTab.Screen name='Favourites' component={Favourites} />
       <ShopTab.Screen name='Profile' component={Profile} />
     </ShopTab.Navigator>
   )

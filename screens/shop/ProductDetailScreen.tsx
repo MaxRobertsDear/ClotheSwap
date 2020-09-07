@@ -32,12 +32,16 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
   }, [navigation, route.params.productTitle])
 
 
-  const submitHandler = useCallback(async (prodId, ownerId) => {
+  const submitHandler = useCallback(async (prodId, ownerId, title, imageUrl, description, price) => {
     try {
       await dispatch(
         favouriteActions.favouriteProduct(
           prodId,
-          ownerId
+          ownerId,
+          title,
+          imageUrl,
+          description,
+          price
         ),
       )
     } catch (err) {
@@ -73,8 +77,14 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
           title='❤️'
           onPress={() => {
             if (selectedProduct) {
-              console.log('liked!')
-              submitHandler(productId, selectedProduct.ownerId)
+              submitHandler(
+                productId,
+                selectedProduct.ownerId,
+                selectedProduct.title,
+                selectedProduct.imageUrl,
+                selectedProduct.description,
+                selectedProduct.price
+              )
             } else {
               return
             }

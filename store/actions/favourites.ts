@@ -18,40 +18,16 @@ export const fetchFavourites = (): AppThunk => {
       const favourites = []
       Object.values(resData).forEach(item => favourites.push(item.productId))
 
-      const favrouiteProducts = []
+      const favouriteProducts = []
       favourites.forEach(prodId => {
-        favrouiteProducts.push(getState().products.availableProducts.find(
+        favouriteProducts.push(getState().products.availableProducts.find(
           (prod) => prod.id === prodId,
-
         ))
       })
-      console.log(favourites)
-      console.log(favrouiteProducts)
-      // console.log(favrouiteProducts)
-      // console.log(getState().products.availableProducts)
-      // console.log(getState().products.availableProducts.filter(product => product.id === '-MCfzdIzwPgYMi4s-Ro5'))
-
-      // const loadedProducts = []
-      // for (const key in resData) {
-      //   loadedProducts.push(
-      //     new Product({
-      //       id: key,
-      //       ownerId: resData[key].ownerId,
-      //       title: resData[key].title,
-      //       imageUrl: imageUrl,
-      //       description: resData[key].description,
-      //       price: resData[key].price,
-      //     }),
-      //   )
-      // }
-
-      // dispatch({
-      //   type: SET_FAVOURITES,
-      //   products: loadedProducts,
-      //   userProducts: loadedProducts.filter(
-      //     (prod) => prod.ownerId === getState().auth.userId,
-      //   ),
-      // })
+      dispatch({
+        type: SET_FAVOURITES,
+        favourites: favouriteProducts,
+      })
     } catch (err) {
       throw new Error(err)
     }
@@ -61,7 +37,11 @@ export const fetchFavourites = (): AppThunk => {
 
 export const favouriteProduct = (
   prodId: string,
-  ownerId: string
+  ownerId: string,
+  title: string,
+  imageUrl: string,
+  description: string,
+  price: number,
 ): AppThunk => {
   return async (dispatch, getState) => {
     const response = await fetch(
@@ -79,13 +59,15 @@ export const favouriteProduct = (
         }),
       },
     )
-    const resData = await response.json()
     dispatch({
       type: CREATE_FAVOURITE,
       favouritesData: {
-        id: resData.name,
         productId: prodId,
         ownerId: ownerId,
+        title: title,
+        imageUrl: imageUrl,
+        description: description,
+        price: price,
       },
     })
   }
