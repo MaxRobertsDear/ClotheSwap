@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback } from 'react'
+import React, { useLayoutEffect, useCallback, useState, useEffect } from 'react'
 import {
   Text,
   StyleSheet,
@@ -23,27 +23,42 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
   const selectedProduct = useSelector((state: RootState) =>
     state.products.availableProducts.find((prod) => prod.id === productId),
   )
+  const favIds = useSelector((state: any) => state.favourites.favIds)
+  const [favourited, setFavourited] = useState(false)
   const dispatch = useDispatch()
-
   useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params.productTitle,
     })
   }, [navigation, route.params.productTitle])
 
+  useEffect(() => {
+    if (favIds && productId && favIds.includes(productId)) {
+      setFavourited(true)
+    }
+  }, [favIds, productId])
 
-  const submitHandler = useCallback(async (prodId, ownerId, title, imageUrl, description, price) => {
+  const submitHandler = useCallback(async (favAction, prodId, ownerId, title, imageUrl, description, price) => {
     try {
-      await dispatch(
-        favouriteActions.favouriteProduct(
-          prodId,
-          ownerId,
-          title,
-          imageUrl,
-          description,
-          price
-        ),
-      )
+      if (favAction === 'favourite') {
+        await dispatch(
+          favouriteActions.favouriteProduct(
+            prodId,
+            ownerId,
+            title,
+            imageUrl,
+            description,
+            price
+          ),
+        )
+      } else if (favAction === 'unfavourite') {
+        await dispatch(
+          favouriteActions.unfavouriteProduct(
+            prodId,
+          ),
+        )
+      }
+
     } catch (err) {
       console.log(err.message)
     }
@@ -76,8 +91,19 @@ const ProductDetailScreen = ({ navigation, route }: Props) => {
           color={Colors.primary}
           title='❤️'
           onPress={() => {
-            if (selectedProduct) {
+            if (selectedProduct && !favourited) {
               submitHandler(
+                'favourite',
+                productId,
+                selectedProduct.ownerId,
+                selectedProduct.title,
+                selectedProduct.imageUrl,
+                selectedProduct.description,
+                selectedProduct.price
+              )
+            } else if (selectedProduct && favourited) {
+              submitHandler(
+                'unfavourite',
                 productId,
                 selectedProduct.ownerId,
                 selectedProduct.title,

@@ -19,6 +19,11 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
   const favourites = useSelector(
     (state: any) => state.favourites.favourites,
   )
+  const favIds = useSelector(
+    (state: any) => state.favourites.favIds,
+  )
+  console.log(favourites)
+  console.log(favIds)
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +32,7 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
 
   const loadFavourites = useCallback(async () => {
     setIsRefreshing(true)
-
+    console.log('triggered')
     setError(null)
     try {
       await dispatch(favouritesActions.fetchFavourites())
@@ -60,7 +65,7 @@ const FavouriteProductsScreen = ({ navigation }: Props) => {
     )
   }
 
-  if (error) {
+  if (error && !favourites.length) {
     return (
       <View style={styles.centered}>
         <Text>An error occurred.</Text>

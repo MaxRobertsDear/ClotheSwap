@@ -1,6 +1,7 @@
 import { AppThunk } from './index.d'
 
 export const CREATE_FAVOURITE = 'CREATE_FAVOURITE'
+export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE'
 export const SET_FAVOURITES = 'SET_FAVOURITES'
 
 export const fetchFavourites = (): AppThunk => {
@@ -27,6 +28,7 @@ export const fetchFavourites = (): AppThunk => {
       dispatch({
         type: SET_FAVOURITES,
         favourites: favouriteProducts,
+        favIds: favourites
       })
     } catch (err) {
       throw new Error(err)
@@ -44,7 +46,7 @@ export const favouriteProduct = (
   price: number,
 ): AppThunk => {
   return async (dispatch, getState) => {
-    const response = await fetch(
+    await fetch(
       `https://rn-shop-app-f2dc2.firebaseio.com/favourites/${getState().auth.userId}/.json?auth=${
       getState().auth.token
       }`,
@@ -55,7 +57,6 @@ export const favouriteProduct = (
         },
         body: JSON.stringify({
           productId: prodId,
-          ownerId: ownerId,
         }),
       },
     )
@@ -69,6 +70,25 @@ export const favouriteProduct = (
         description: description,
         price: price,
       },
+    })
+  }
+}
+
+export const unfavouriteProduct = (
+  prodId: string,
+): AppThunk => {
+  // TODO target the productId of the item to be deleted
+  return async (dispatch, getState) => {
+    await fetch(
+      `https://rn-shop-app-f2dc2.firebaseio.com/favourites/${getState().auth.userId}/${prodId}/.json?auth=${
+      getState().auth.token
+      }`,
+      {
+        method: 'DELETE',
+      },
+    )
+    dispatch({
+      type: REMOVE_FAVOURITE, productId: prodId,
     })
   }
 }

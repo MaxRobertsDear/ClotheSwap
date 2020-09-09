@@ -1,16 +1,18 @@
-import { SET_FAVOURITES, CREATE_FAVOURITE } from '../actions/favourites'
+import { SET_FAVOURITES, CREATE_FAVOURITE, REMOVE_FAVOURITE } from '../actions/favourites'
 import Product from '../../models/product'
 
 
 const initialState = {
-  favourites: []
+  favourites: [],
+  favIds: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_FAVOURITES:
       return {
-        favourites: action.favourites
+        favourites: action.favourites,
+        favIds: action.favIds
       }
     case CREATE_FAVOURITE:
       const newFav = new Product({
@@ -23,7 +25,16 @@ export default (state = initialState, action) => {
       })
       return {
         ...state,
-        favourites: state.favourites.concat(newFav)
+        favourites: state.favourites.concat(newFav),
+        favIds: state.favIds.concat(action.favouritesData.productId)
+      }
+    case REMOVE_FAVOURITE:
+      return {
+        ...state,
+        favourites: state.favourites.filter(
+          product => product.id !== action.productId
+        ),
+        favIds: state.favIds.includes(!action.productId)
       }
     default:
       return state
